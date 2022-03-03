@@ -1,0 +1,123 @@
+.profile {
+  display: flex;
+  margin: 40px auto 50px;
+}
+
+@media screen and (max-width: 766px) {
+  .profile {
+    flex-wrap: wrap;
+    max-width: 282px;
+  }
+}
+
+.profile::after {
+  content: "";
+  background-image: url(../../images/add.svg);
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  background-size: 16px;
+  padding: 15px 132px;
+  border: 2px solid white;
+  background-position: center center;
+}
+
+@media screen and (min-width: 767px) {
+  .profile::after {
+    width: 22px;
+    height: 22px;
+    background-size: 22px;
+    padding: 12px 66px;
+    align-self: center;
+  }
+}
+
+.profile__avatar {
+  margin: 0 auto 26px;
+  border-radius: 50%;
+  max-width: 122px;
+}
+
+@media screen and (min-width: 767px) {
+  .profile__avatar {
+    margin: 0;
+    max-width: 120px;
+  }
+}
+
+@media screen and (max-width: 766px) {
+  .profile__info {
+    margin: 0 auto;
+    max-width: 190px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .profile__info {
+    margin: 22px 0 0 30px;
+    width: 100%;
+  }
+}
+
+.profile__header {
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 27px;
+  line-height: 1.22;
+  margin: 0;
+}
+
+@media screen and (max-width: 766px) {
+  .profile__header {
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .profile__header {
+    font-size: 42px;
+    line-height: 1.14;
+    margin-right: 18px;
+  }
+}
+
+.profile__header::after {
+  content: "";
+  background-image: url(../../images/edit.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 7px;
+  width: 7px;
+  height: 7px;
+  padding: 7px 7px;
+  border: 1px solid white;
+  margin-left: 11px;
+  display: inline-block;
+}
+
+@media screen and (min-width: 767px) {
+  .profile__header::after {
+    margin-left: 19px;
+  }
+}
+
+.profile__description {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 8px auto 28px;
+}
+
+@media screen and (min-width: 767px) {
+  .profile__description {
+    font-size: 18px;
+    margin: 8px 0 0;
+  }
+}
+
+@media screen and (max-width: 766px) {
+  .profile__description {
+    text-align: center;
+  }
+}

@@ -13,7 +13,7 @@
 
 @media screen and (min-width: 767px) {
   .header {
-    margin: 45px 0;
+    margin: 45px 0 40px;
   }
 
   .header::after {
