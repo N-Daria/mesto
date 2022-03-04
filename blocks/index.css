@@ -2,11 +2,13 @@
 @import url(../vendor/fonts/fonts.css);
 
 @import url(page/page.css);
+@import url(list/list.css);
 
 @import url(header/header.css);
 
 @import url(profile/profile.css);
 
+@import url(elements/elements.css);
 
 
 
@@ -19,12 +21,14 @@
 
 
 
+
+
+
+@media screen and (max-width: 766px) {
+  
+}
 
 
 @media screen and (min-width: 767px) {
 
-}
-
-@media screen and (max-width: 766px) {
-  
 }

@@ -11,7 +11,7 @@
   margin-top: 27px;
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 900px) {
   .header {
     margin: 45px 0 40px;
   }
@@ -27,7 +27,7 @@
   margin: 0 27px;
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 900px) {
   .header__logo {
     max-width: 142px;
     margin: 0;

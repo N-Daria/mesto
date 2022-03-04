@@ -1,0 +1,53 @@
+.elements {
+  margin: 35px 20px;
+}
+
+@media screen and (min-width: 900px) {
+  .elements {
+    margin: 48px auto;
+  }
+}
+
+.elements__gallery {
+  display: grid;
+  gap: 20px 17px;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+}
+
+.elements__item {
+  margin: 0 auto;
+  font-size: 0;
+}
+
+.elements__photo {
+  max-width: 282px;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+}
+
+
+.elements__like {
+  background-image: url(../../images/like.svg);
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  background-size: 22px;
+  max-width: 282px;
+  padding: 25px 15px 26px 21px;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
+  box-sizing: border-box;
+}
+
+.elements__text {
+  margin: 0;
+  color: black;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 80%;
+}
+
+

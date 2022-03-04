@@ -3,7 +3,7 @@
   margin: 40px auto 50px;
 }
 
-@media screen and (max-width: 766px) {
+@media screen and (max-width: 899px) {
   .profile {
     flex-wrap: wrap;
     max-width: 282px;
@@ -22,7 +22,7 @@
   background-position: center center;
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 900px) {
   .profile::after {
     width: 22px;
     height: 22px;
@@ -38,21 +38,21 @@
   max-width: 122px;
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 900px) {
   .profile__avatar {
     margin: 0;
     max-width: 120px;
   }
 }
 
-@media screen and (max-width: 766px) {
+@media screen and (max-width: 899px) {
   .profile__info {
     margin: 0 auto;
     max-width: 190px;
   }
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 900px) {
   .profile__info {
     margin: 22px 0 0 30px;
     width: 100%;
@@ -60,20 +60,19 @@
 }
 
 .profile__header {
-  font-family: Inter;
   font-weight: 500;
   font-size: 27px;
   line-height: 1.22;
   margin: 0;
 }
 
-@media screen and (max-width: 766px) {
+@media screen and (max-width: 899px) {
   .profile__header {
     text-align: center;
   }
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 900px) {
   .profile__header {
     font-size: 42px;
     line-height: 1.14;
@@ -95,28 +94,27 @@
   display: inline-block;
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 900px) {
   .profile__header::after {
     margin-left: 19px;
   }
 }
 
 .profile__description {
-  font-family: Inter;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.2;
   margin: 8px auto 28px;
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 900px) {
   .profile__description {
     font-size: 18px;
     margin: 8px 0 0;
   }
 }
 
-@media screen and (max-width: 766px) {
+@media screen and (max-width: 899px) {
   .profile__description {
     text-align: center;
   }
