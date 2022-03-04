@@ -1,34 +1,12 @@
 .profile {
   display: flex;
-  margin: 40px auto 50px;
+  margin: 40px auto 36px;
 }
 
 @media screen and (max-width: 899px) {
   .profile {
     flex-wrap: wrap;
     max-width: 282px;
-  }
-}
-
-.profile::after {
-  content: "";
-  background-image: url(../../images/add.svg);
-  background-repeat: no-repeat;
-  width: 16px;
-  height: 16px;
-  background-size: 16px;
-  padding: 15px 132px;
-  border: 2px solid white;
-  background-position: center center;
-}
-
-@media screen and (min-width: 900px) {
-  .profile::after {
-    width: 22px;
-    height: 22px;
-    background-size: 22px;
-    padding: 12px 66px;
-    align-self: center;
   }
 }
 
@@ -45,16 +23,21 @@
   }
 }
 
+.profile__info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 @media screen and (max-width: 899px) {
   .profile__info {
-    margin: 0 auto;
-    max-width: 190px;
+    justify-content: center;
   }
 }
 
 @media screen and (min-width: 900px) {
   .profile__info {
-    margin: 22px 0 0 30px;
+    margin: 15px 0 15px 30px;
     width: 100%;
   }
 }
@@ -63,40 +46,33 @@
   font-weight: 500;
   font-size: 27px;
   line-height: 1.22;
-  margin: 0;
-}
-
-@media screen and (max-width: 899px) {
-  .profile__header {
-    text-align: center;
-  }
+  margin: 0 10px 0 26px;
 }
 
 @media screen and (min-width: 900px) {
   .profile__header {
     font-size: 42px;
     line-height: 1.14;
-    margin-right: 18px;
+    margin: 0;
   }
 }
 
-.profile__header::after {
-  content: "";
+.profile__edit {
   background-image: url(../../images/edit.svg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 7px;
   width: 7px;
   height: 7px;
-  padding: 7px 7px;
+  padding: 4px 4px;
   border: 1px solid white;
-  margin-left: 11px;
-  display: inline-block;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 900px) {
-  .profile__header::after {
+  .profile__edit {
     margin-left: 19px;
+    padding: 8px 8px;
   }
 }
 
@@ -104,18 +80,41 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 1.2;
-  margin: 8px auto 28px;
+  margin: 8px auto 33px;
+  width: 100%;
 }
 
 @media screen and (min-width: 900px) {
   .profile__description {
     font-size: 18px;
-    margin: 8px 0 0;
+    margin: 0;
   }
 }
 
 @media screen and (max-width: 899px) {
   .profile__description {
     text-align: center;
+  }
+}
+
+.profile__add {
+  background-image: url(../../images/add.svg);
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  background-size: 16px;
+  padding: 15px 132px;
+  border: 2px solid white;
+  background-position: center center;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 900px) {
+  .profile__add {
+    width: 22px;
+    height: 22px;
+    background-size: 22px;
+    padding: 12px 66px;
+    align-self: center;
   }
 }
