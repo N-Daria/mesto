@@ -25,7 +25,6 @@
   overflow: hidden;
 }
 
-
 .elements__like {
   background-image: url(../../images/like.svg);
   background-repeat: no-repeat;
@@ -50,4 +49,11 @@
   width: 80%;
 }
 
+.elements__like_active {
+  background-image: url(../../images/like-active.svg);
+}
 
+.elements__like:hover {
+  background-image: url(../../images/like-hover.svg);
+  cursor: pointer;
+}
