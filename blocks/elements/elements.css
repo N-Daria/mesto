@@ -17,24 +17,15 @@
 .elements__item {
   margin: 0 auto;
   font-size: 0;
+  max-width: 282px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .elements__photo {
-  max-width: 282px;
+  max-width: 100%;
   border-radius: 10px 10px 0 0;
   overflow: hidden;
-}
-
-.elements__like {
-  background-image: url(../../images/like.svg);
-  background-repeat: no-repeat;
-  background-position: right 20px center;
-  background-size: 22px;
-  max-width: 282px;
-  padding: 25px 15px 26px 21px;
-  background-color: white;
-  border-radius: 0 0 10px 10px;
-  box-sizing: border-box;
 }
 
 .elements__text {
@@ -47,6 +38,22 @@
   white-space: nowrap;
   overflow: hidden;
   width: 80%;
+  background-color: white;
+  border-radius: 0 0 0 10px;
+  padding: 26px 8px 25px 20px;
+  box-sizing: border-box;
+}
+
+.elements__like {
+  background-image: url(../../images/like.svg);
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  background-size: 22px;
+  background-color: white;
+  border-radius: 0 0 10px 0;
+  width: 20%;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
 .elements__like_active {
@@ -55,5 +62,4 @@
 
 .elements__like:hover {
   background-image: url(../../images/like-hover.svg);
-  cursor: pointer;
 }
