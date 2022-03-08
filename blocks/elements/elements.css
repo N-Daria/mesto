@@ -55,6 +55,7 @@
   width: 20%;
   cursor: pointer;
   box-sizing: border-box;
+  transition: 0.4s ease background-image;
 }
 
 .elements__like_active {

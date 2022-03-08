@@ -68,6 +68,7 @@
   padding: 4px 4px;
   border: 1px solid white;
   cursor: pointer;
+  transition: 0.4s opacity ease;
 }
 
 @media screen and (min-width: 900px) {
@@ -112,6 +113,7 @@
   border: 2px solid white;
   background-position: center center;
   cursor: pointer;
+  transition: 0.4s opacity ease;
 }
 
 @media screen and (min-width: 900px) {
