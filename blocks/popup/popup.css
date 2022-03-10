@@ -1,16 +1,13 @@
-.popup_opened {
-  display: block;
-}
-
 .popup {
   display: none;
-  /* display: flex; */
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
 }
+
+
 
 .popup::after {
   content: "";
@@ -118,4 +115,8 @@
 
 .popup__button:hover {
   opacity: 0.5;
+}
+
+.popup_opened {
+  display: flex;
 }
