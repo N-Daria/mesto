@@ -28,11 +28,13 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  max-width: calc(100% - 120px - 150px - 30px);
 }
 
 @media screen and (max-width: 899px) {
   .profile__info {
     justify-content: center;
+    max-width: 282px;
   }
 }
 
@@ -48,6 +50,9 @@
   font-size: 27px;
   line-height: 1.22;
   margin: 0 10px 0 26px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 900px) {
@@ -73,7 +78,7 @@
 
 @media screen and (min-width: 900px) {
   .profile__edit {
-    margin-left: 19px;
+    margin: 0 19px;
     padding: 8px 8px;
   }
 }
@@ -88,6 +93,9 @@
   line-height: 1.2;
   margin: 8px auto 33px;
   width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 900px) {
