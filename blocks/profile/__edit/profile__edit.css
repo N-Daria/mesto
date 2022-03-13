@@ -9,6 +9,8 @@
   border: 1px solid white;
   cursor: pointer;
   transition: 0.4s opacity ease;
+  background-color: inherit;
+  box-sizing: content-box;
 }
 
 @media screen and (min-width: 900px) {

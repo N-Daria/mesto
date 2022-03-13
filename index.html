@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="blocks/index.css">
+  <link rel="stylesheet" href="pages/index.css">
 </head>
 
 <body class="page">
@@ -20,54 +20,55 @@
       <img src="images/image.jpg" alt="Жак-Ив-Кусто" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__header">Жак-Ив Кусто</h1>
-        <div class="profile__edit"></div>
+        <button class="profile__edit" type="submit"></button>
         <p class="profile__description">Исследователь океана</p>
       </div>
-      <div class="profile__add"></div>
-
-      <section class="popup">
-        <form class="popup__container">
-          <div class="popup__close"></div>
-          <h2 class="popup__header">Редактировать профиль</h2>
-          <input type="text" class="popup__name input">
-          <input type="text" class="popup__description input">
-          <button class="popup__button" type="submit">Сохранить</button>
-        </form>
-      </section>
-
+      <button class="profile__add" type="submit"></button>
     </section>
 
     <section class="elements">
       <ul class="elements__gallery list">
         <li class="elements__item">
           <img src="images/kirill-pershin-1088404-unsplash.jpg" alt="Храм" class="elements__photo">
-          <p class="elements__text">Карачаевск</p>
-          <div class="elements__like"></div>
+          <div class="elements__info">
+            <p class="elements__text">Карачаевск</p>
+            <button type="submit" class="elements__like"></button>
+          </div>
         </li>
         <li class="elements__item">
           <img src="images/kirill-pershin-1404681-unsplash.jpg" alt="Долина" class="elements__photo">
-          <p class="elements__text">Гора Эльбрус</p>
-          <div class="elements__like"></div>
+          <div class="elements__info">
+            <p class="elements__text">Гора Эльбрус</p>
+            <button type="submit" class="elements__like"></button>
+          </div>
         </li>
         <li class="elements__item">
           <img src="images/kirill-pershin-1556355-unsplash.jpg" alt="Горы" class="elements__photo">
-          <p class="elements__text">Домбай</p>
-          <div class="elements__like"></div>
+          <div class="elements__info">
+            <p class="elements__text">Домбай</p>
+            <button class="elements__like" type="submit"></button>
+          </div>
         </li>
         <li class="elements__item">
           <img src="images/kirill-pershin-1404681-unsplash.jpg" alt="Долина" class="elements__photo">
-          <p class="elements__text">Гора Эльбрус</p>
-          <div class="elements__like"></div>
+          <div class="elements__info">
+            <p class="elements__text">Гора Эльбрус</p>
+            <button type="submit" class="elements__like"></button>
+          </div>
         </li>
         <li class="elements__item">
           <img src="images/kirill-pershin-1556355-unsplash.jpg" alt="Горы" class="elements__photo">
-          <p class="elements__text">Домбай</p>
-          <div class="elements__like"></div>
+          <div class="elements__info">
+            <p class="elements__text">Домбай</p>
+            <button type="submit" class="elements__like"></button>
+          </div>
         </li>
         <li class="elements__item">
           <img src="images/kirill-pershin-1088404-unsplash.jpg" alt="Храм" class="elements__photo">
-          <p class="elements__text">Карачаево-Черкессия</p>
-          <div class="elements__like"></div>
+          <div class="elements__info">
+            <p class="elements__text">Карачаево-Черкессия</p>
+            <button type="submit" class="elements__like"></button>
+          </div>
         </li>
       </ul>
     </section>
@@ -77,7 +78,17 @@
     <p class="footer__copyright">&copy; 2022 Nikulina Daria</p>
   </footer>
 
-  <script src="script/index.js"> </script>
+  <section class="popup">
+    <form class="popup__container" name="popup__container">
+      <button type="button" class="popup__close"></button>
+      <h2 class="popup__header">Редактировать профиль</h2>
+      <input type="text" name="name" class="popup__input">
+      <input type="text" name="description" class="popup__input">
+      <button class="popup__button" type="submit">Сохранить</button>
+    </form>
+  </section>
+
+  <script src="scripts/script/index.js"> </script>
 </body>
 
 </html>

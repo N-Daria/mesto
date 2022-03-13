@@ -3,18 +3,14 @@
   background-repeat: no-repeat;
   background-position: right 20px center;
   background-size: 22px;
-  background-color: white;
-  border-radius: 0 0 10px 0;
   width: 20%;
+  transition: 0.4s ease opacity;
   cursor: pointer;
-  box-sizing: border-box;
-  transition: 0.4s ease background-image;
-}
-
-.elements__like_active {
-  background-image: url(../../../images/like-active.svg);
+  border: none;
+  background-color: inherit;
+  border-radius: inherit;
 }
 
 .elements__like:hover {
-  background-image: url(../../../images/like-hover.svg);
+  opacity: 0.5;
 }

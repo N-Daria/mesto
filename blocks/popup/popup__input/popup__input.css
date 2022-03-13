@@ -1,4 +1,4 @@
-.input {
+.popup__input {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -11,9 +11,10 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+
+  margin: 0 0 30px;
 }
 
-.input:focus {
-  border: none;
-  border-bottom: 1px black solid;
+.popup__input:last-of-type {
+  margin: 0 0 48px;
 }
