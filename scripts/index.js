@@ -1,43 +1,64 @@
-const popup = document.querySelector('.popup');
-const closePopup = document.querySelector('.popup__close');
-const openPopup = document.querySelector('.profile__edit');
-
-const form = document.querySelector('.popup__container');
-
-const name = form.querySelector('input[name="name"]');
-const info = form.querySelector('input[name="description"]');
-
+const openEdit = document.querySelector('.profile__edit');
+const popupEdit = document.querySelector('.popup__edit');
+const editForm = popupEdit.firstElementChild;
 const profileHeader = document.querySelector('.profile__header');
 const profileInfo = document.querySelector('.profile__description');
+const name = editForm.querySelector('input[name="name"]');
+const info = editForm.querySelector('input[name="description"]');
 
-function popupShow() {
+const openAdd = document.querySelector('.profile__add');
+const popupAdd = document.querySelector('.popup__add');
+const addForm = popupAdd.firstElementChild;
+
+function popupShow(popup) {
   popup.classList.toggle('popup_opened');
 }
 
-function preventSubmit(evt) {
+openEdit.addEventListener('click', function () {
+  popupShow(popupEdit);
+  name.value = profileHeader.textContent;
+  info.value = profileInfo.textContent;
+});
+
+function preventEdit(evt) {
   evt.preventDefault();
 
   profileHeader.textContent = name.value;
   profileInfo.textContent = info.value;
 
-  popupShow();
+  popupShow(popupEdit);
 }
 
-openPopup.addEventListener('click', function () {
-  popupShow();
-  name.value = profileHeader.textContent;
-  info.value = profileInfo.textContent;
-});
+editForm.addEventListener('submit', preventEdit);
 
-closePopup.addEventListener('click', function () {
-  popupShow();
-});
+document.querySelector('.page').addEventListener('click', function (event) {
+  let IfClosePopup = event.target.classList.contains('popup__close');
+  let IfLike = event.target.classList.contains('elements__like');
 
-form.addEventListener('submit', preventSubmit);
+  if (IfClosePopup) {
+    popupShow(event.target.closest('.popup'));
+  } if (IfLike) {
+    event.target.classList.toggle('elements__like_active');
+  } else {
+    return
+  }
+})
 
+openAdd.addEventListener('click', function () {
+  popupShow(popupAdd);
+})
 
+addForm.addEventListener('submit', addPlace);
 
+function addPlace(evt) {
+  evt.preventDefault();
 
+  const place = addForm.querySelector('input[name="place"]');
+  const link = addForm.querySelector('input[name="link"]');
+
+  renderCard(place.value, link.value);
+  popupShow(popupAdd);
+}
 
 function renderCard(name, link) {
   const elements__gallery = document.querySelector('.elements__gallery');
@@ -45,12 +66,12 @@ function renderCard(name, link) {
 
   card.querySelector('.elements__photo').setAttribute('src', link);
   card.querySelector('.elements__text').textContent = name;
+  card.querySelector('.elements__photo').setAttribute('alt', name);
 
-  elements__gallery.append(card);
+  elements__gallery.prepend(card);
 }
 
 window.addEventListener('load', function () {
-
   const initialCards = [
     {
       name: 'Архыз',
@@ -81,4 +102,7 @@ window.addEventListener('load', function () {
   initialCards.forEach(function (element) {
     renderCard(element.name, element.link);
   })
-})
+});
+
+
+
