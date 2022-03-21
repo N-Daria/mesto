@@ -10,6 +10,8 @@ const openAdd = document.querySelector('.profile__add');
 const popupAdd = document.querySelector('.popup__add');
 const addForm = popupAdd.firstElementChild;
 
+const openView = document.querySelector('.popup__view');
+
 function popupShow(popup) {
   popup.classList.toggle('popup_opened');
 }
@@ -35,6 +37,7 @@ document.querySelector('.page').addEventListener('click', function (event) {
   const ifClosePopup = event.target.classList.contains('popup__close');
   const ifLike = event.target.classList.contains('elements__like');
   const ifremove = event.target.classList.contains('elements__remove');
+  const ifView = event.target.classList.contains('elements__photo');
 
   if (ifClosePopup) {
     popupShow(event.target.closest('.popup'));
@@ -42,10 +45,24 @@ document.querySelector('.page').addEventListener('click', function (event) {
     likeCard(event.target);
   } if (ifremove) {
     removeCard(event.target.closest('.elements__card'));
+  } if (ifView) {
+    viewPhoto(event.target.closest('.elements__card'));
   } else {
     return
   }
 })
+
+function viewPhoto(photo) {
+  const photoImg = photo.querySelector('.elements__photo').getAttribute('src');
+  const photoInfo = photo.querySelector('.elements__text').textContent;
+  const photoAlt = photo.querySelector('.elements__photo').getAttribute('alt')
+
+  openView.querySelector('.popup__photo').setAttribute('alt', photoAlt);
+  openView.querySelector('.popup__photo').setAttribute('src', photoImg);
+  openView.querySelector('.popup__info').textContent = photoInfo;
+
+  popupShow(openView);
+}
 
 function likeCard(card) {
   card.classList.toggle('elements__like_active');

@@ -52,8 +52,16 @@
       <h2 class="popup__header">Новое место</h2>
       <input type="text" name="place" class="popup__input" placeholder="Название">
       <input type="text" name="link" class="popup__input" placeholder="Ссылка на картинку">
-      <button class="popup__button popup__button_add type="submit">Создать</button>
+      <button class="popup__button popup__button_add" type="submit">Создать</button>
     </form>
+  </section>
+
+  <section class="popup popup__view">
+    <figure class="popup__photo-container">
+      <button type="button" class="popup__close"></button>
+      <img src="" alt="" class="popup__photo">
+      <figcaption class="popup__info"></figcaption>
+    </figure>
   </section>
 
   <template id="card">

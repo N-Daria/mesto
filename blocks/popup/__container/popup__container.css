@@ -1,6 +1,5 @@
 .popup__container {
   position: fixed;
-  left: calc(50% - (282px / 2));
   background-color: white;
   z-index: 2;
   align-self: center;
@@ -14,7 +13,6 @@
 @media screen and (min-width: 900px) {
   .popup__container {
     max-width: 430px;
-    left: calc(50% - (430px / 2));
     padding: 33px 36px 36px;
   }
 }
