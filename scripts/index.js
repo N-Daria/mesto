@@ -33,6 +33,26 @@ function preventEdit(evt) {
 
 editForm.addEventListener('submit', preventEdit);
 
+function likeCard(card) {
+  card.classList.toggle('elements__like_active');
+}
+
+function removeCard(card) {
+  card.remove();
+}
+
+function viewPhoto(photo) {
+  const photoImg = photo.querySelector('.elements__photo').getAttribute('src');
+  const photoInfo = photo.querySelector('.elements__text').textContent;
+  const photoAlt = photo.querySelector('.elements__photo').getAttribute('alt')
+
+  openView.querySelector('.popup__photo').setAttribute('alt', photoAlt);
+  openView.querySelector('.popup__photo').setAttribute('src', photoImg);
+  openView.querySelector('.popup__info').textContent = photoInfo;
+
+  popupShow(openView);
+}
+
 document.querySelector('.page').addEventListener('click', function (event) {
   const ifClosePopup = event.target.classList.contains('popup__close');
   const ifLike = event.target.classList.contains('elements__like');
@@ -52,41 +72,9 @@ document.querySelector('.page').addEventListener('click', function (event) {
   }
 })
 
-function viewPhoto(photo) {
-  const photoImg = photo.querySelector('.elements__photo').getAttribute('src');
-  const photoInfo = photo.querySelector('.elements__text').textContent;
-  const photoAlt = photo.querySelector('.elements__photo').getAttribute('alt')
-
-  openView.querySelector('.popup__photo').setAttribute('alt', photoAlt);
-  openView.querySelector('.popup__photo').setAttribute('src', photoImg);
-  openView.querySelector('.popup__info').textContent = photoInfo;
-
-  popupShow(openView);
-}
-
-function likeCard(card) {
-  card.classList.toggle('elements__like_active');
-}
-
-function removeCard(card) {
-  card.remove();
-}
-
 openAdd.addEventListener('click', function () {
   popupShow(popupAdd);
 })
-
-addForm.addEventListener('submit', addPlace);
-
-function addPlace(evt) {
-  evt.preventDefault();
-
-  const place = addForm.querySelector('input[name="place"]');
-  const link = addForm.querySelector('input[name="link"]');
-
-  renderCard(place.value, link.value);
-  popupShow(popupAdd);
-}
 
 function renderCard(name, link) {
   const elements__gallery = document.querySelector('.elements__gallery');
@@ -98,6 +86,18 @@ function renderCard(name, link) {
 
   elements__gallery.prepend(card);
 }
+
+function addPlace(evt) {
+  evt.preventDefault();
+
+  const place = addForm.querySelector('input[name="place"]');
+  const link = addForm.querySelector('input[name="link"]');
+
+  renderCard(place.value, link.value);
+  popupShow(popupAdd);
+}
+
+addForm.addEventListener('submit', addPlace);
 
 window.addEventListener('load', function () {
   const initialCards = [
@@ -131,6 +131,3 @@ window.addEventListener('load', function () {
     renderCard(element.name, element.link);
   })
 });
-
-
-
