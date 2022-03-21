@@ -1,5 +1,5 @@
 const openEdit = document.querySelector('.profile__edit');
-const popupEdit = document.querySelector('.popup__edit');
+const popupEdit = document.querySelector('.edit');
 const editForm = popupEdit.firstElementChild;
 const profileHeader = document.querySelector('.profile__header');
 const profileInfo = document.querySelector('.profile__description');
@@ -7,10 +7,10 @@ const name = editForm.querySelector('input[name="name"]');
 const info = editForm.querySelector('input[name="description"]');
 
 const openAdd = document.querySelector('.profile__add');
-const popupAdd = document.querySelector('.popup__add');
+const popupAdd = document.querySelector('.add');
 const addForm = popupAdd.firstElementChild;
 
-const openView = document.querySelector('.popup__view');
+const openView = document.querySelector('.view');
 
 function popupShow(popup) {
   popup.classList.toggle('popup_opened');
