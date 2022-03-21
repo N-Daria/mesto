@@ -32,17 +32,28 @@ function preventEdit(evt) {
 editForm.addEventListener('submit', preventEdit);
 
 document.querySelector('.page').addEventListener('click', function (event) {
-  let IfClosePopup = event.target.classList.contains('popup__close');
-  let IfLike = event.target.classList.contains('elements__like');
+  const ifClosePopup = event.target.classList.contains('popup__close');
+  const ifLike = event.target.classList.contains('elements__like');
+  const ifremove = event.target.classList.contains('elements__remove');
 
-  if (IfClosePopup) {
+  if (ifClosePopup) {
     popupShow(event.target.closest('.popup'));
-  } if (IfLike) {
-    event.target.classList.toggle('elements__like_active');
+  } if (ifLike) {
+    likeCard(event.target);
+  } if (ifremove) {
+    removeCard(event.target.closest('.elements__card'));
   } else {
     return
   }
 })
+
+function likeCard(card) {
+  card.classList.toggle('elements__like_active');
+}
+
+function removeCard(card) {
+  card.remove();
+}
 
 openAdd.addEventListener('click', function () {
   popupShow(popupAdd);
