@@ -8,6 +8,8 @@
   right: 20px;
   transition: opacity 0.4s ease;
   cursor: pointer;
+  background-color: initial;
+  border: none;
 }
 
 .elements__remove:hover {
