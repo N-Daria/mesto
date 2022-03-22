@@ -1,4 +1,4 @@
-.popup__view::after {
+.view::after {
   content: "";
   opacity: 0.9;
 }
