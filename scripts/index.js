@@ -15,6 +15,10 @@ const place = addForm.querySelector('input[name="place"]');
 const link = addForm.querySelector('input[name="link"]');
 
 const openView = document.querySelector('.view');
+const popupViewImage = openView.querySelector('.popup__photo');
+const popupViewTitle = openView.querySelector('.popup__info');
+
+const closeButton = document.querySelectorAll('.popup__close');
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -47,67 +51,57 @@ function removeCard(card) {
   card.remove();
 }
 
-function viewPhoto(photo) {
-  const photoImg = photo.querySelector('.elements__photo').getAttribute('src');
-  const photoInfo = photo.querySelector('.elements__text').textContent;
-  const photoAlt = photo.querySelector('.elements__photo').getAttribute('alt')
-
-  openView.querySelector('.popup__photo').setAttribute('alt', photoAlt);
-  openView.querySelector('.popup__photo').setAttribute('src', photoImg);
-  openView.querySelector('.popup__info').textContent = photoInfo;
-
-  openPopup(openView);
-}
-
 function renderCard(name, link) {
   const card = cardTemplate.content.querySelector('.elements__card').cloneNode(true);
   const elementPhoto = card.querySelector('.elements__photo');
+  const elementLike = card.querySelector('.elements__like');
+  const elementRemove = card.querySelector('.elements__remove');
 
   elementPhoto.setAttribute('src', link);
   card.querySelector('.elements__text').textContent = name;
   elementPhoto.setAttribute('alt', name);
 
+  elementPhoto.addEventListener('click', () => viewPhoto(name, link));
+  elementLike.addEventListener('click', () => likeCard(event));
+  elementRemove.addEventListener('click', () => removeCard(event.target.closest('.elements__card')));
+
+  function viewPhoto(name, link) {
+    popupViewImage.alt = name;
+    popupViewImage.src = link;
+    popupViewTitle.textContent = name;
+    openPopup(openView);
+  }
+  addCard(card);
+}
+
+function addCard(card) {
   elementsGallery.prepend(card);
 }
 
-function addPlace(evt) {
+function handleAddFormSubmit(evt) {
   evt.preventDefault();
   renderCard(place.value, link.value);
   closePopup(popupAdd);
   addForm.reset();
 }
 
+closeButton.forEach(function (element) {
+  element.addEventListener('click', function (event) {
+    closePopup(event.target.closest('.popup'))
+  })
+})
+
 openEdit.addEventListener('click', changeHeader);
 
 editForm.addEventListener('submit', handleProfileFormSubmit);
-
-document.querySelector('.page').addEventListener('click', function (event) {
-  const ifClosePopup = event.target.classList.contains('popup__close');
-  const ifLike = event.target.classList.contains('elements__like');
-  const ifremove = event.target.classList.contains('elements__remove');
-  const ifView = event.target.classList.contains('elements__photo');
-
-  if (ifClosePopup) {
-    closePopup(event.target.closest('.popup'));
-  } if (ifLike) {
-    likeCard(event);
-  } if (ifremove) {
-    removeCard(event.target.closest('.elements__card'));
-  } if (ifView) {
-    viewPhoto(event.target.closest('.elements__card'));
-  } else {
-    return
-  }
-})
 
 openAdd.addEventListener('click', function () {
   openPopup(popupAdd);
 })
 
-addForm.addEventListener('submit', addPlace);
+addForm.addEventListener('submit', handleAddFormSubmit);
 
 window.addEventListener('load', function () {
-
   initialCards.forEach(function (element) {
     renderCard(element.name, element.link);
   })
