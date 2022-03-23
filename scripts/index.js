@@ -19,6 +19,7 @@ const popupViewImage = openView.querySelector('.popup__photo');
 const popupViewTitle = openView.querySelector('.popup__info');
 
 const closeButtons = document.querySelectorAll('.popup__close');
+let photoCard;
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -72,8 +73,7 @@ function renderCard(name, link) {
   elementPhoto.addEventListener('click', () => viewPhoto(name, link));
   elementLike.addEventListener('click', () => likeCard(event));
   elementRemove.addEventListener('click', removeCard);
-
-  addCard(card);
+  return card;
 }
 
 function addCard(card) {
@@ -82,7 +82,8 @@ function addCard(card) {
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
-  renderCard(place.value, link.value);
+  photoCard = renderCard(place.value, link.value);
+  addCard(photoCard);
   closePopup(popupAdd);
   addForm.reset();
 }
@@ -105,6 +106,7 @@ addForm.addEventListener('submit', handleAddFormSubmit);
 
 window.addEventListener('load', function () {
   initialCards.forEach(function (element) {
-    renderCard(element.name, element.link);
+    photoCard = renderCard(element.name, element.link);
+    addCard(photoCard);
   })
 });
