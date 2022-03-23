@@ -18,7 +18,7 @@ const openView = document.querySelector('.view');
 const popupViewImage = openView.querySelector('.popup__photo');
 const popupViewTitle = openView.querySelector('.popup__info');
 
-const closeButton = document.querySelectorAll('.popup__close');
+const closeButtons = document.querySelectorAll('.popup__close');
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -47,8 +47,16 @@ function likeCard(evt) {
   evt.target.classList.toggle('elements__like_active');
 }
 
-function removeCard(card) {
+function removeCard(event) {
+  const card = event.target.closest('.elements__card');
   card.remove();
+}
+
+function viewPhoto(name, link) {
+  popupViewImage.alt = name;
+  popupViewImage.src = link;
+  popupViewTitle.textContent = name;
+  openPopup(openView);
 }
 
 function renderCard(name, link) {
@@ -63,14 +71,8 @@ function renderCard(name, link) {
 
   elementPhoto.addEventListener('click', () => viewPhoto(name, link));
   elementLike.addEventListener('click', () => likeCard(event));
-  elementRemove.addEventListener('click', () => removeCard(event.target.closest('.elements__card')));
+  elementRemove.addEventListener('click', removeCard);
 
-  function viewPhoto(name, link) {
-    popupViewImage.alt = name;
-    popupViewImage.src = link;
-    popupViewTitle.textContent = name;
-    openPopup(openView);
-  }
   addCard(card);
 }
 
@@ -85,7 +87,7 @@ function handleAddFormSubmit(evt) {
   addForm.reset();
 }
 
-closeButton.forEach(function (element) {
+closeButtons.forEach(function (element) {
   element.addEventListener('click', function (event) {
     closePopup(event.target.closest('.popup'))
   })
