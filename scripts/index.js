@@ -19,6 +19,7 @@ const popupViewImage = openView.querySelector('.popup__photo');
 const popupViewTitle = openView.querySelector('.popup__info');
 
 const closeButtons = document.querySelectorAll('.popup__close');
+
 let photoCard;
 
 function closePopup(popup) {
@@ -114,3 +115,24 @@ window.addEventListener('load', function () {
     addCard(photoCard);
   })
 });
+
+
+const overlayPopup = document.querySelectorAll('.popup');
+
+overlayPopup.forEach(function (element) {
+  element.addEventListener('click', function (event) {
+    if (event.currentTarget === event.target) {
+      closePopup(event.target.closest('.popup'));
+    }
+  });
+})
+
+// overlayPopup.forEach(function (element) {
+//   element.addEventListener('keydown', function (event) {
+//     console.log(event.key);
+//     // debugger
+//     if (event.key === 'Escape') {
+//       closePopup(event.target.closest('.popup'));
+//     }
+//   });
+// })
