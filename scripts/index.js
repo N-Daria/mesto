@@ -82,10 +82,14 @@ function addCard(card) {
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
-  photoCard = renderCard(place.value, link.value);
-  addCard(photoCard);
-  closePopup(popupAdd);
-  addForm.reset();
+  const buttonAdd = addForm.querySelector('.popup__button_add');
+
+  if (!buttonAdd.classList.contains('popup__button_disabled')) {
+    photoCard = renderCard(place.value, link.value);
+    addCard(photoCard);
+    closePopup(popupAdd);
+    addForm.reset();
+  }
 }
 
 closeButtons.forEach(function (element) {

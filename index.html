@@ -37,21 +37,27 @@
   </footer>
 
   <section class="popup edit">
-    <form class="popup__container editForm" name="popup__container">
+    <form class="popup__form form editForm" name="popup__container">
       <button type="button" class="popup__close" aria-label="Закрыть"></button>
       <h2 class="popup__header">Редактировать профиль</h2>
-      <input type="text" name="name" class="popup__input">
-      <input type="text" name="description" class="popup__input">
+      <input id="name-input" type="text" name="name" class="popup__input" required maxlength="40" minlength="2">
+      <span class="name-input-error"></span>
+      <input id="description-input" type="text" name="description" class="popup__input" required maxlength="200"
+        minlength="2">
+      <span class="description-input-error"></span>
       <button class="popup__button popup__button_edit" type="submit">Сохранить</button>
     </form>
   </section>
 
   <section class="popup add">
-    <form class="popup__container addForm" name="popup__container">
+    <form class="popup__form form addForm" name="popup__container" novalidate>
       <button type="button" class="popup__close" aria-label="Закрыть"></button>
       <h2 class="popup__header">Новое место</h2>
-      <input type="text" name="place" class="popup__input" placeholder="Название">
-      <input type="text" name="link" class="popup__input" placeholder="Ссылка на картинку">
+      <input id="place-input" type="text" name="place" class="popup__input" placeholder="Название" required
+        maxlength="30" minlength="2">
+      <span class="place-input-error"></span>
+      <input id="link-input" type="url" name="link" class="popup__input" placeholder="Ссылка на картинку" required>
+      <span class="link-input-error"></span>
       <button class="popup__button popup__button_add" type="submit">Создать</button>
     </form>
   </section>
@@ -77,8 +83,10 @@
     </li>
   </template>
 
+
   <script src="scripts/cards.js"></script>
   <script src="scripts/index.js"></script>
+  <script src="scripts/validate.js"></script>
 </body>
 
 </html>

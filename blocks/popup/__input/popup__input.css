@@ -18,3 +18,7 @@
 .popup__input:last-of-type {
   margin: 0 0 48px;
 }
+
+.popup__input:focus {
+  outline: none;
+}
