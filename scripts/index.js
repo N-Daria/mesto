@@ -38,10 +38,11 @@ function changeHeader() {
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
-  profileHeader.textContent = name.value;
-  profileInfo.textContent = info.value;
-
-  closePopup(popupEdit);
+  if (!(editForm.querySelector('.popup__button_edit').classList.contains('popup__button_disabled'))) {
+    profileHeader.textContent = name.value;
+    profileInfo.textContent = info.value;
+    closePopup(popupEdit);
+  }
 }
 
 function likeCard(evt) {
@@ -82,9 +83,8 @@ function addCard(card) {
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
-  const buttonAdd = addForm.querySelector('.popup__button_add');
 
-  if (!buttonAdd.classList.contains('popup__button_disabled')) {
+  if (!(addForm.querySelector('.popup__button_add').classList.contains('popup__button_disabled'))) {
     photoCard = renderCard(place.value, link.value);
     addCard(photoCard);
     closePopup(popupAdd);
