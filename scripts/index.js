@@ -24,10 +24,18 @@ let photoCard;
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('click', clossingWithEsc);
 }
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', clossingWithEsc);
+}
+
+function clossingWithEsc() {
+  if (event.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  }
 }
 
 function changeHeader() {
@@ -122,10 +130,4 @@ overlayPopup.forEach(function (element) {
       closePopup(event.target.closest('.popup'));
     }
   });
-})
-
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
 })
