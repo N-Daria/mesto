@@ -10,3 +10,7 @@
 .popup__input-error_active:last-of-type {
     margin-bottom: 48px;
 }
+
+* {
+  box-sizing: border-box;
+}

@@ -20,11 +20,10 @@ const popupViewTitle = openView.querySelector('.popup__info');
 
 const closeButtons = document.querySelectorAll('.popup__close');
 const overlayPopup = document.querySelectorAll('.popup');
-let photoCard;
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('click', clossingWithEsc);
+  document.removeEventListener('keydown', clossingWithEsc);
 }
 
 function openPopup(popup) {
@@ -47,7 +46,7 @@ function changeHeader() {
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
-  if (!(editForm.querySelector('.popup__button_edit').classList.contains('popup__button_disabled'))) {
+  if (editForm.querySelector('.popup__button_edit').disabled === false) {
     profileHeader.textContent = name.value;
     profileInfo.textContent = info.value;
     closePopup(popupEdit);
@@ -92,12 +91,15 @@ function addCard(card) {
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
+  const addButton = addForm.querySelector('.popup__button_add');
 
-  if (!(addForm.querySelector('.popup__button_add').classList.contains('popup__button_disabled'))) {
-    photoCard = renderCard(place.value, link.value);
+  if (addForm.querySelector('.popup__button_add').disabled === false) {
+    const photoCard = renderCard(place.value, link.value);
     addCard(photoCard);
     closePopup(popupAdd);
     addForm.reset();
+    addButton.disabled = true;
+    addButton.classList.add('popup__button_disabled');
   }
 }
 
@@ -119,7 +121,7 @@ addForm.addEventListener('submit', handleAddFormSubmit);
 
 window.addEventListener('load', function () {
   initialCards.forEach(function (element) {
-    photoCard = renderCard(element.name, element.link);
+    const photoCard = renderCard(element.name, element.link);
     addCard(photoCard);
   })
 });
