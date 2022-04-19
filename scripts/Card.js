@@ -1,3 +1,6 @@
+import { cardTemplate, openView, popupViewImage,  popupViewTitle } from './consts.js';
+import {openPopup} from './index.js';
+
 class Card {
   constructor(name, link) {
     this._link = link;
@@ -37,9 +40,11 @@ class Card {
   }
 
   _viewPhoto() {
-    _popupViewImage.alt = this._name;
-    _popupViewImage.src = this._link;
-    _popupViewTitle.textContent = this._name;
+    popupViewImage.alt = this._name;
+    popupViewImage.src = this._link;
+    popupViewTitle.textContent = this._name;
     openPopup(openView);
   }
 }
+
+export {Card}

@@ -1,5 +1,6 @@
-// import * as consts from './ js';
-// import * as card from './ js';
+import { openEdit, popupEdit, editForm, profileHeader, profileInfo, name, info, elementsGallery, openAdd, popupAdd, addForm, place, link, closeButtons, overlayPopup, initialCards, settings } from './consts.js';
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js'
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -87,4 +88,4 @@ window.addEventListener('load', function () {
   })
 });
 
-
+export { openPopup }
