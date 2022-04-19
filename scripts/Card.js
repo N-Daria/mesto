@@ -32,8 +32,8 @@ class Card {
   }
 
   _removeCard(event) {
-    const card = event.target.closest('.elements__card');
-    card.remove();
+    const _card = event.target.closest('.elements__card');
+    _card.remove();
   }
 
   _viewPhoto() {

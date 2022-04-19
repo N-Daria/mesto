@@ -51,6 +51,11 @@ function handleAddFormSubmit(evt) {
   }
 }
 
+document.querySelectorAll(settings.formSelector).forEach((formElement) => {
+  const setFormValidation = new FormValidator(settings, formElement);
+  setFormValidation.enableValidation();
+});
+
 closeButtons.forEach(function (element) {
   element.addEventListener('click', function (event) {
     closePopup(event.target.closest('.popup'))
@@ -65,14 +70,7 @@ openAdd.addEventListener('click', function () {
   openPopup(popupAdd);
 })
 
- addForm.addEventListener('submit', handleAddFormSubmit);
-
-window.addEventListener('load', function () {
-   initialCards.forEach(function (element) {
-    const photoCard = new Card(element.name, element.link)
-    addCard(photoCard.getCard());
-  })
-});
+addForm.addEventListener('submit', handleAddFormSubmit);
 
 overlayPopup.forEach(function (element) {
   element.addEventListener('click', function (event) {
@@ -81,3 +79,12 @@ overlayPopup.forEach(function (element) {
     }
   });
 })
+
+window.addEventListener('load', function () {
+  initialCards.forEach((element) => {
+    const photoCard = new Card(element.name, element.link);
+    addCard(photoCard.getCard());
+  })
+});
+
+
