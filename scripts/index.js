@@ -1,61 +1,44 @@
-import { openEdit, popupEdit, editForm, profileHeader, profileInfo, name, info, elementsGallery, openAdd, popupAdd, addForm, place, link, closeButtons, overlayPopup, initialCards, settings } from './consts.js';
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js'
+import { openEdit, popupEdit, editForm, profileHeader, profileInfo, name, info, elementsGallery, openAdd, popupAdd, addForm, place, link, closeButtons, overlayPopup, initialCards, settings, formsList } from './consts.js';
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js'
+import { openPopup, closePopup } from './utils.js';
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', clossingWithEsc);
-}
-
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', clossingWithEsc);
-}
-
-function clossingWithEsc() {
-  if (event.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
+const editFormValidation = new FormValidator(settings, formsList[0]);
+const addFormValidation = new FormValidator(settings, formsList[1]);
 
 function changeHeader() {
+  editFormValidation.resetErrors();
   openPopup(popupEdit);
   name.value = profileHeader.textContent;
   info.value = profileInfo.textContent;
+  editFormValidation.enableValidation();
 }
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-
-  if (editForm.querySelector('.popup__button_edit').disabled === false) {
-    profileHeader.textContent = name.value;
-    profileInfo.textContent = info.value;
-    closePopup(popupEdit);
-  }
+  profileHeader.textContent = name.value;
+  profileInfo.textContent = info.value;
+  closePopup(popupEdit);
+  editFormValidation.disactivateButtonState();
 }
 
 function addCard(card) {
   elementsGallery.prepend(card);
 }
 
-function handleAddFormSubmit(evt) {
-  evt.preventDefault();
-  const addButton = addForm.querySelector('.popup__button_add');
-
-  if (addForm.querySelector('.popup__button_add').disabled === false) {
-    const photoCard = new Card(place.value, link.value);
-    addCard(photoCard.getCard());
-    closePopup(popupAdd);
-    addForm.reset();
-    addButton.disabled = true;
-    addButton.classList.add('popup__button_disabled');
-  }
+function createCard(name, link) {
+  const photoCard = new Card(name, link);
+  return photoCard;
 }
 
-document.querySelectorAll(settings.formSelector).forEach((formElement) => {
-  const setFormValidation = new FormValidator(settings, formElement);
-  setFormValidation.enableValidation();
-});
+function handleAddFormSubmit(evt) {
+  evt.preventDefault();
+  const photoCard = createCard(place.value, link.value);
+  addCard(photoCard.getCard());
+  closePopup(popupAdd);
+  addForm.reset();
+  addFormValidation.disactivateButtonState();
+}
 
 closeButtons.forEach(function (element) {
   element.addEventListener('click', function (event) {
@@ -68,6 +51,7 @@ openEdit.addEventListener('click', changeHeader);
 editForm.addEventListener('submit', handleProfileFormSubmit);
 
 openAdd.addEventListener('click', function () {
+  addFormValidation.enableValidation();
   openPopup(popupAdd);
 })
 
@@ -83,9 +67,7 @@ overlayPopup.forEach(function (element) {
 
 window.addEventListener('load', function () {
   initialCards.forEach((element) => {
-    const photoCard = new Card(element.name, element.link);
+    const photoCard = createCard(element.name, element.link);
     addCard(photoCard.getCard());
   })
 });
-
-export { openPopup }
