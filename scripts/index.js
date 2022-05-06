@@ -3,6 +3,10 @@ import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js'
 import { openPopup, closePopup } from './utils.js';
 
+import Section from './Section.js';
+import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
+
 const editFormValidation = new FormValidator(settings, formsList[0]);
 const addFormValidation = new FormValidator(settings, formsList[1]);
 
@@ -57,13 +61,13 @@ openAdd.addEventListener('click', function () {
 
 addForm.addEventListener('submit', handleAddFormSubmit);
 
-overlayPopup.forEach(function (element) {
-  element.addEventListener('click', function (event) {
-    if (event.currentTarget === event.target) {
-      closePopup(event.target.closest('.popup'));
-    }
-  });
-})
+// overlayPopup.forEach(function (element) {
+//   element.addEventListener('click', function (event) {
+//     if (event.currentTarget === event.target) {
+//       closePopup(event.target.closest('.popup'));
+//     }
+//   });
+// })
 
 window.addEventListener('load', function () {
   initialCards.forEach((element) => {
