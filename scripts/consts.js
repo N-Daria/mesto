@@ -14,12 +14,12 @@ export const addForm = popupAdd.querySelector('.addForm');
 export const place = addForm.querySelector('input[name="place"]');
 export const link = addForm.querySelector('input[name="link"]');
 
-export const openView = document.querySelector('.view');
-export const popupViewImage = openView.querySelector('.popup__photo');
-export const popupViewTitle = openView.querySelector('.popup__info');
+export const popupView = document.querySelector('.view');
+export const popupViewImage = popupView.querySelector('.popup__photo');
+export const popupViewTitle = popupView.querySelector('.popup__info');
 
-export const closeButtons = document.querySelectorAll('.popup__close');
-export const overlayPopup = document.querySelectorAll('.popup');
+// export const closeButtons = document.querySelectorAll('.popup__close');
+// export const overlayPopup = document.querySelectorAll('.popup');
 
 export const initialCards = [
   {

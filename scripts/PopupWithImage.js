@@ -6,6 +6,7 @@ class PopupWithImage extends Popup {
     popupViewImage.alt = name;
     popupViewImage.src = link;
     popupViewTitle.textContent = name;
+    super.open();
   }
 }
 

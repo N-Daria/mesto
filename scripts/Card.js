@@ -1,12 +1,11 @@
-import { openView, cardTemplate } from './consts.js';
-import { openPopup } from './utils.js';
-
+import { popupView, popupAdd, popupEdit, cardTemplate } from './consts.js';
 
 import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
 
-const popupView = new Popup(openView);
-
+// const popupViewClass = new Popup(popupView);
+// const popupAddClass = new Popup(popupAdd);
+// const popupEditClass = new Popup(popupEdit);
 
 export class Card {
   constructor(name, link) {
@@ -45,8 +44,7 @@ export class Card {
   }
 
   _viewPhoto() {
-    popupView.open();
-    const bigPhoto = new PopupWithImage(); 
+    const bigPhoto = new PopupWithImage();
     bigPhoto.open(this._link, this._name);
   }
 }

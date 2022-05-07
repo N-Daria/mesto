@@ -1,9 +1,11 @@
-import { overlayPopup } from './consts.js';
+import { popupView } from './consts.js';
 
 class Popup {
   constructor(popupSelector) {
-    this._popupSelector = popupSelector;
-    // this.close = close.bind(this);
+    this._popupSelector = popupSelector || popupView;
+    this._closeButton = this._popupSelector.querySelector('.popup__close');
+    this.close = this.close.bind(this);
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   open() {
@@ -23,6 +25,8 @@ class Popup {
   }
 
   setEventListeners() {
+    this._closeButton.addEventListener('click', this.close);
+
     document.addEventListener('keydown', this._handleEscClose);
 
     this._popupSelector.addEventListener('click', (event) => {
