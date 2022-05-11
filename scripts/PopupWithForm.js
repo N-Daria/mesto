@@ -5,16 +5,18 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._callbackFunction = callbackFunction;
     this._popupSelector = popupSelector;
+    this._inputs = Array.from(this._popupSelector.querySelectorAll('input'));
   }
 
   _getInputValues() {
-    // собирает данные всех полей формы.
-
-
+    this._inputsValues = {};
+    this._inputs.forEach((el) => {
+      this._inputsValues[el.id] = el.value;
+    });
+    return this._inputsValues
   }
 
   setEventListeners() {
-    // должен добавлять обработчик сабмита формы.
     super.setEventListeners();
 
     this._popupSelector.addEventListener('submit', this._callbackFunction);
@@ -23,8 +25,9 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
 
-
-
-    // при закрытии попапа форма должна ещё и сбрасываться.
+    this._getInputValues();
+    this._inputs.forEach((el) => {
+      el.value = "";
+    });
   }
 }
