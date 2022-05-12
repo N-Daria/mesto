@@ -1,28 +1,25 @@
-import { openEdit, popupView, popupEdit, editForm, name, info, elementsGallery, openAdd, popupAdd, addForm, place, link, initialCards, settings, formsList } from './consts.js';
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js'
-
+import { openEdit, popupEdit, name, info, elementsGallery, openAdd, popupAdd, place, link, initialCards, settings, formsList } from './consts.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js'
 import Section from './Section.js';
 import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js'
 
-
 const editFormValidation = new FormValidator(settings, formsList[0]);
 const addFormValidation = new FormValidator(settings, formsList[1]);
+const userInformation = new UserInfo(name, info);
 
 const popupAddClass = new Popup(popupAdd);
 const popupEditClass = new Popup(popupEdit);
-const popupViewClass = new Popup(popupView);
-
-const userInformation = new UserInfo(name, info);
 
 const AddFormClass = new PopupWithForm(
   function (evt) {
     evt.preventDefault();
-    const photoCard = createCard(place.value, link.value);
-    addCard(photoCard.getCard());
+    const newCardData = { name: place.value, link: link.value };
+    const photoCard = createCard(newCardData);
+    section.addItem(photoCard.getCard());
     AddFormClass.close();
     addFormValidation.disactivateButtonState();
   }, popupAdd
@@ -41,6 +38,16 @@ const ProfileFormClass = new PopupWithForm(
 
 ProfileFormClass.setEventListeners();
 
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: (element) => { 
+      const photoCard = createCard(element);
+      section.addItem(photoCard.getCard());
+    }
+  },
+  elementsGallery)
+
 function changeHeader() {
   editFormValidation.resetErrors();
   popupEditClass.open();
@@ -48,6 +55,10 @@ function changeHeader() {
   editFormValidation.enableValidation();
 }
 
+function handleCardClick() {
+  const bigPhoto = new PopupWithImage();
+  bigPhoto.open(this._link, this._name);
+}
 
 openAdd.addEventListener('click', function () {
   addFormValidation.enableValidation();
@@ -56,19 +67,11 @@ openAdd.addEventListener('click', function () {
 
 openEdit.addEventListener('click', changeHeader);
 
-
 window.addEventListener('load', function () {
-  initialCards.forEach((element) => {
-    const photoCard = createCard(element.name, element.link);
-    addCard(photoCard.getCard());
-  })
+  section.renderItems();
 });
 
-function addCard(card) {
-  elementsGallery.prepend(card);
-}
-
-function createCard(name, link) {
-  const photoCard = new Card(name, link);
-  return photoCard;
+function createCard(data) {
+  const photoCard = new Card({ data }, handleCardClick);
+  return photoCard
 }

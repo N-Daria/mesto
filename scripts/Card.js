@@ -1,16 +1,10 @@
-import { popupView, popupAdd, popupEdit, cardTemplate } from './consts.js';
+import { cardTemplate } from './consts.js';
 
-import Popup from './Popup.js';
-import PopupWithImage from './PopupWithImage.js';
-
-// const popupViewClass = new Popup(popupView);
-// const popupAddClass = new Popup(popupAdd);
-// const popupEditClass = new Popup(popupEdit);
-
-export class Card {
-  constructor(name, link) {
-    this._link = link;
-    this._name = name;
+export default class Card {
+  constructor({ data }, handleCardClick ) {
+    this._link = data.link;
+    this._name = data.name;
+    this._handleCardClick = handleCardClick;
   }
 
   _generateTemplate() {
@@ -28,7 +22,7 @@ export class Card {
     this._card.querySelector('.elements__text').textContent = this._name;
     elementPhoto.setAttribute('alt', this._name);
 
-    elementPhoto.addEventListener('click', () => this._viewPhoto());
+    elementPhoto.addEventListener('click', () => this._handleCardClick());
     this._elementLike.addEventListener('click', () => this._likeCard());
     elementRemove.addEventListener('click', () => this._removeCard());
 
@@ -41,10 +35,5 @@ export class Card {
 
   _removeCard() {
     this._card.remove();
-  }
-
-  _viewPhoto() {
-    const bigPhoto = new PopupWithImage();
-    bigPhoto.open(this._link, this._name);
   }
 }

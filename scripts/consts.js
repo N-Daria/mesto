@@ -18,9 +18,6 @@ export const popupView = document.querySelector('.view');
 export const popupViewImage = popupView.querySelector('.popup__photo');
 export const popupViewTitle = popupView.querySelector('.popup__info');
 
-// export const closeButtons = document.querySelectorAll('.popup__close');
-// export const overlayPopup = document.querySelectorAll('.popup');
-
 export const initialCards = [
   {
     name: 'Архыз',
@@ -56,6 +53,5 @@ export const settings = {
   inputErrorClass: 'popup__input_error',
   errorClass: 'popup__input-error_active'
 };
-
 
 export const formsList = Array.from(document.querySelectorAll(settings.formSelector));

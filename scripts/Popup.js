@@ -1,6 +1,6 @@
 import { popupView } from './consts.js';
 
-class Popup {
+export default class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector || popupView;
     this._closeButton = this._popupSelector.querySelector('.popup__close');
@@ -36,5 +36,3 @@ class Popup {
     });
   }
 }
-
-export default Popup

@@ -1,7 +1,6 @@
 import { popupViewImage, popupViewTitle } from './consts.js';
 import Popup from './Popup.js';
-
-class PopupWithImage extends Popup {
+export default  class PopupWithImage extends Popup {
   open(link, name) {
     popupViewImage.alt = name;
     popupViewImage.src = link;
@@ -9,5 +8,3 @@ class PopupWithImage extends Popup {
     super.open();
   }
 }
-
-export default PopupWithImage
