@@ -1,6 +1,6 @@
-import '../pages/index.css'; 
+import '../pages/index.css';
 
-import { openEdit, popupEdit, name, info, elementsGallery, openAdd, popupAdd, place, link, initialCards, settings, formsList } from './consts.js';
+import { openEdit, profileHeader, profileInfo, openAdd, initialCards, settings, formsList } from './consts.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js'
 import Section from './Section.js';
@@ -10,66 +10,68 @@ import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js'
 
 const editFormValidation = new FormValidator(settings, formsList[0]);
+editFormValidation.enableValidation();
+
 const addFormValidation = new FormValidator(settings, formsList[1]);
+addFormValidation.enableValidation();
 
-const userInformation = new UserInfo(name, info);
+const userInformation = new UserInfo(profileHeader, profileInfo);
 
-const popupAddClass = new Popup(popupAdd);
-const popupEditClass = new Popup(popupEdit);
+const popupAddClass = new Popup('.add');
+const popupEditClass = new Popup('.edit');
+const bigPhoto = new PopupWithImage('.view');
 
-const AddFormClass = new PopupWithForm(
-  function (evt) {
+const addFormClass = new PopupWithForm(
+  function (inputsData, evt) {
     evt.preventDefault();
-    const newCardData = { name: place.value, link: link.value };
-    const photoCard = createCard(newCardData);
-    section.addItem(photoCard.getCard());
-    AddFormClass.close();
+    inputsData = { name: inputsData['place-input'], link: inputsData['link-input'] };
+    const photoCard = createCard(inputsData);
+    section.addItem(photoCard);
+    addFormClass.close();
     addFormValidation.disactivateButtonState();
-  }, popupAdd
+  }, '.add'
 );
 
-AddFormClass.setEventListeners();
+addFormClass.setEventListeners();
 
-const ProfileFormClass = new PopupWithForm(
-  function (evt) {
+const profileFormClass = new PopupWithForm(
+  function (inputsData, evt) {
     evt.preventDefault();
-    userInformation.setUserInfo();
+    userInformation.setUserInfo(inputsData);
     popupEditClass.close();
     editFormValidation.disactivateButtonState();
-  }, popupEdit
+  }, '.edit'
 );
 
-ProfileFormClass.setEventListeners();
+profileFormClass.setEventListeners();
 
 const section = new Section(
   {
     items: initialCards,
-    renderer: (element) => { 
+    renderer: (element) => {
       const photoCard = createCard(element);
-      section.addItem(photoCard.getCard());
+      section.addItem(photoCard);
     }
   },
-  elementsGallery)
+  '.elements__gallery')
 
 function changeHeader() {
   editFormValidation.resetErrors();
   popupEditClass.open();
   userInformation.getUserInfo();
-  editFormValidation.enableValidation();
 }
 
 function handleCardClick() {
-  const bigPhoto = new PopupWithImage();
   bigPhoto.open(this._link, this._name);
+  bigPhoto.setEventListeners();
 }
 
 function createCard(data) {
   const photoCard = new Card({ data }, handleCardClick);
-  return photoCard
+  return photoCard.getCard()
 }
 
 openAdd.addEventListener('click', function () {
-  addFormValidation.enableValidation();
   popupAddClass.open();
 })
 

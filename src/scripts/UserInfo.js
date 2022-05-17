@@ -1,19 +1,19 @@
-import {profileHeader, profileInfo} from './consts.js'
+import {name as nameSelector, info as informationSelector} from './consts.js'
 
 export default class UserInfo {
-  constructor(nameSelector, informationSelector) {
-    this._nameSelector = nameSelector;
-    this._informationSelector = informationSelector;
+  constructor(profileHeader, profileInfo) {
+    this._profileHeader = profileHeader;
+    this._profileInfo = profileInfo;
   }
 
   getUserInfo() {
-    this._nameSelector.value = profileHeader.textContent;
-    this._informationSelector.value = profileInfo.textContent;
+    nameSelector.value = this._profileHeader.textContent;
+    informationSelector.value = this._profileInfo.textContent;
   }
 
-  setUserInfo() {
-    profileHeader.textContent = this._nameSelector.value;
-    profileInfo.textContent = this._informationSelector.value;
+  setUserInfo(inputsData) {
+    this._profileHeader.textContent = inputsData['name-input'];
+    this._profileInfo.textContent = inputsData['description-input'];
   }
 
 }
