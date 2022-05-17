@@ -1,4 +1,4 @@
-import {name as nameSelector, info as informationSelector} from './consts.js'
+import {name as nameSelector, info as informationSelector} from '../utils/consts.js'
 
 export default class UserInfo {
   constructor(profileHeader, profileInfo) {

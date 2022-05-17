@@ -1,4 +1,4 @@
-import { cardTemplate } from './consts.js';
+import { cardTemplate } from '../utils/consts.js';
 
 export default class Card {
   constructor({ data }, handleCardClick ) {

@@ -1,13 +1,13 @@
-import '../pages/index.css';
+import './index.css';
 
-import { openEdit, profileHeader, profileInfo, openAdd, initialCards, settings, formsList } from './consts.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js'
-import Section from './Section.js';
-import Popup from './Popup.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js'
+import { openEdit, profileHeader, profileInfo, openAdd, initialCards, settings, formsList } from '../scripts/utils/consts.js';
+import Card from '../scripts/components/Card.js';
+import FormValidator from '../scripts/components/FormValidator.js'
+import Section from '../scripts/components/Section.js';
+import Popup from '../scripts/components/Popup.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import UserInfo from '../scripts/components/UserInfo.js'
 
 const editFormValidation = new FormValidator(settings, formsList[0]);
 editFormValidation.enableValidation();
