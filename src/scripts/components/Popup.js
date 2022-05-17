@@ -1,8 +1,6 @@
-import { popupView } from './consts.js';
-
 export default class Popup {
   constructor(popupSelector) {
-    this._popupSelector = popupSelector || popupView;
+    this._popupSelector = document.querySelector(popupSelector);
     this._closeButton = this._popupSelector.querySelector('.popup__close');
     this.close = this.close.bind(this);
     this._handleEscClose = this._handleEscClose.bind(this);
@@ -10,7 +8,7 @@ export default class Popup {
 
   open() {
     this._popupSelector.classList.add('popup_opened');
-    this.setEventListeners();
+    document.addEventListener('keydown', this._handleEscClose);
   }
 
   close() {
@@ -26,8 +24,6 @@ export default class Popup {
 
   setEventListeners() {
     this._closeButton.addEventListener('click', this.close);
-
-    document.addEventListener('keydown', this._handleEscClose);
 
     this._popupSelector.addEventListener('click', (event) => {
       if (event.currentTarget === event.target) {

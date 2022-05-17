@@ -80,5 +80,3 @@ openEdit.addEventListener('click', changeHeader);
 window.addEventListener('load', function () {
   section.renderItems();
 });
-
-console.log(55)

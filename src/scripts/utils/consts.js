@@ -6,13 +6,8 @@ export const profileInfo = document.querySelector('.profile__description');
 export const name = editForm.querySelector('input[name="name"]');
 export const info = editForm.querySelector('input[name="description"]');
 
-export const elementsGallery = document.querySelector('.elements__gallery');
 export const cardTemplate = document.querySelector('#card');
 export const openAdd = document.querySelector('.profile__add');
-export const popupAdd = document.querySelector('.add');
-export const addForm = popupAdd.querySelector('.addForm');
-export const place = addForm.querySelector('input[name="place"]');
-export const link = addForm.querySelector('input[name="link"]');
 
 export const popupView = document.querySelector('.view');
 export const popupViewImage = popupView.querySelector('.popup__photo');
