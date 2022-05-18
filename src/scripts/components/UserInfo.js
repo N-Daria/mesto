@@ -2,8 +2,8 @@ import {name as nameSelector, info as informationSelector} from '../utils/consts
 
 export default class UserInfo {
   constructor(profileHeader, profileInfo) {
-    this._profileHeader = profileHeader;
-    this._profileInfo = profileInfo;
+    this._profileHeader = document.querySelector(profileHeader);
+    this._profileInfo = document.querySelector(profileInfo);
   }
 
   getUserInfo() {

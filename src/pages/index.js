@@ -1,25 +1,23 @@
 import './index.css';
 
-import { openEdit, profileHeader, profileInfo, openAdd, initialCards, settings, formsList } from '../scripts/utils/consts.js';
+import { openEdit, openAdd, initialCards, settings, editForm, addForm } from '../scripts/utils/consts.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js'
 import Section from '../scripts/components/Section.js';
-import Popup from '../scripts/components/Popup.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js'
 
-const editFormValidation = new FormValidator(settings, formsList[0]);
+const editFormValidation = new FormValidator(settings, editForm);
 editFormValidation.enableValidation();
 
-const addFormValidation = new FormValidator(settings, formsList[1]);
+const addFormValidation = new FormValidator(settings, addForm);
 addFormValidation.enableValidation();
 
-const userInformation = new UserInfo(profileHeader, profileInfo);
+const userInformation = new UserInfo('.profile__header', '.profile__description');
 
-const popupAddClass = new Popup('.add');
-const popupEditClass = new Popup('.edit');
 const bigPhoto = new PopupWithImage('.view');
+  bigPhoto.setEventListeners();
 
 const addFormClass = new PopupWithForm(
   function (inputsData, evt) {
@@ -38,7 +36,7 @@ const profileFormClass = new PopupWithForm(
   function (inputsData, evt) {
     evt.preventDefault();
     userInformation.setUserInfo(inputsData);
-    popupEditClass.close();
+    profileFormClass.close();
     editFormValidation.disactivateButtonState();
   }, '.edit'
 );
@@ -57,13 +55,12 @@ const section = new Section(
 
 function changeHeader() {
   editFormValidation.resetErrors();
-  popupEditClass.open();
+  profileFormClass.open();
   userInformation.getUserInfo();
 }
 
 function handleCardClick() {
   bigPhoto.open(this._link, this._name);
-  bigPhoto.setEventListeners();
 }
 
 function createCard(data) {
@@ -72,7 +69,7 @@ function createCard(data) {
 }
 
 openAdd.addEventListener('click', function () {
-  popupAddClass.open();
+  addFormClass.open();
 })
 
 openEdit.addEventListener('click', changeHeader);

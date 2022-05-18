@@ -1,12 +1,11 @@
 export const openEdit = document.querySelector('.profile__edit');
 export const popupEdit = document.querySelector('.edit');
 export const editForm = popupEdit.querySelector('.editForm');
-export const profileHeader = document.querySelector('.profile__header');
-export const profileInfo = document.querySelector('.profile__description');
 export const name = editForm.querySelector('input[name="name"]');
 export const info = editForm.querySelector('input[name="description"]');
 
 export const cardTemplate = document.querySelector('#card');
+export const addForm = document.querySelector('.addForm');
 export const openAdd = document.querySelector('.profile__add');
 
 export const popupView = document.querySelector('.view');
@@ -48,5 +47,3 @@ export const settings = {
   inputErrorClass: 'popup__input_error',
   errorClass: 'popup__input-error_active'
 };
-
-export const formsList = Array.from(document.querySelectorAll(settings.formSelector));
