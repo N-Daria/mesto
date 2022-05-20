@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+<script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
+
+<body class="page">
+
+  <header class="header">
+    <img src="bbe2a6eafac19c3d031c.svg" alt="логотип" class="header__logo">
+  </header>
+
+  <main class="content">
+    <section class="profile">
+      <img src="6163c2039d1f0eb8d7ca.jpg" alt="Жак-Ив-Кусто" class="profile__avatar">
+      <div class="profile__info">
+        <h1 class="profile__header">Жак-Ив Кусто</h1>
+        <button class="profile__edit" type="button" aria-label="Редактировать"></button>
+        <p class="profile__description">Исследователь океана</p>
+      </div>
+      <button class="profile__add" type="button" aria-label="Добавить новую фотографию"></button>
+    </section>
+
+    <section class="elements">
+      <ul class="elements__gallery list">
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2022 Nikulina Daria</p>
+  </footer>
+
+  <section class="popup edit">
+    <form class="popup__form form editForm" name="popup__container">
+      <button type="button" class="popup__close" aria-label="Закрыть"></button>
+      <h2 class="popup__header">Редактировать профиль</h2>
+      <input id="name-input" type="text" name="name" class="popup__input" required maxlength="40" minlength="2">
+      <span class="name-input-error"></span>
+      <input id="description-input" type="text" name="description" class="popup__input" required maxlength="200"
+        minlength="2">
+      <span class="description-input-error"></span>
+      <button class="popup__button popup__button_edit" type="submit">Сохранить</button>
+    </form>
+  </section>
+
+  <section class="popup add">
+    <form class="popup__form form addForm" name="popup__container" novalidate>
+      <button type="button" class="popup__close" aria-label="Закрыть"></button>
+      <h2 class="popup__header">Новое место</h2>
+      <input id="place-input" type="text" name="place" class="popup__input" placeholder="Название" required
+        maxlength="30" minlength="2">
+      <span class="place-input-error"></span>
+      <input id="link-input" type="url" name="link" class="popup__input" placeholder="Ссылка на картинку" required>
+      <span class="link-input-error"></span>
+      <button class="popup__button popup__button_add" type="submit">Создать</button>
+    </form>
+  </section>
+
+  <section class="popup view">
+    <figure class="popup__photo-container">
+      <button type="button" class="popup__close" aria-label="Закрыть"></button>
+      <img src="#" alt="" class="popup__photo">
+      <figcaption class="popup__info"></figcaption>
+    </figure>
+  </section>
+
+  <template id="card">
+    <li class="elements__card">
+      <figure class="elements__item">
+        <button type="button" class="elements__remove" aria-label="Удалить фотографию"></button>
+        <img src="#" alt="" class="elements__photo">
+        <figcaption class="elements__info">
+          <p class="elements__text"></p>
+          <button type="button" class="elements__like" aria-label="Нравится"></button>
+        </figcaption>
+      </figure>
+    </li>
+  </template>
+
+</body>
+
+</html>
