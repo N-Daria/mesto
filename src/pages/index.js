@@ -7,6 +7,8 @@ import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js'
+import Api from '../scripts/components/Api';
+
 
 const editFormValidation = new FormValidator(settings, editForm);
 editFormValidation.enableValidation();
@@ -16,8 +18,38 @@ addFormValidation.enableValidation();
 
 const userInformation = new UserInfo('.profile__header', '.profile__description');
 
+const userInformationFromServer = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-41/users/me',
+  headers: {
+    headers: {
+      authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
+    }
+  }
+}
+
+const yy = new Api(userInformationFromServer);
+// console.log(yy)
+
+const ff = yy.get();
+
+// console.log(ff)
+
+
+// fetch('https://mesto.nomoreparties.co/v1/cohort-41/users/me', {
+//   headers: {
+//     authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
+//   }
+// })
+//   .then(res => res.json())
+//   .then((result) => {
+//     console.log(result);
+//   });
+
+
+
+
 const bigPhoto = new PopupWithImage('.view');
-  bigPhoto.setEventListeners();
+bigPhoto.setEventListeners();
 
 const addFormClass = new PopupWithForm(
   function (inputsData, evt) {

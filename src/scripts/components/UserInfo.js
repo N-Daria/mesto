@@ -11,9 +11,9 @@ export default class UserInfo {
     informationSelector.value = this._profileInfo.textContent;
   }
 
-  setUserInfo(inputsData) {
-    this._profileHeader.textContent = inputsData['name-input'];
-    this._profileInfo.textContent = inputsData['description-input'];
+  setUserInfo(name, description) {
+    this._profileHeader.textContent = name;
+    this._profileInfo.textContent = description;
   }
 
 }
