@@ -5,13 +5,8 @@ export default class Api {
   }
 
   get() {
-   return fetch(this._url, this._headers)
-      .then(res => res.json())
-      .then((result) => {
-        console.log(result);
-      });
+    return fetch(this._url, {
+      headers: this._headers
+    })
   }
-
-
-
 }

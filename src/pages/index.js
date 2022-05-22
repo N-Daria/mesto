@@ -1,6 +1,6 @@
 import './index.css';
 
-import { openEdit, openAdd, initialCards, settings, editForm, addForm } from '../scripts/utils/consts.js';
+import { openEdit, openAdd, settings, editForm, addForm, userInfoFromServer, cardsInfoFromServer } from '../scripts/utils/consts.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js'
 import Section from '../scripts/components/Section.js';
@@ -16,40 +16,38 @@ editFormValidation.enableValidation();
 const addFormValidation = new FormValidator(settings, addForm);
 addFormValidation.enableValidation();
 
-const userInformation = new UserInfo('.profile__header', '.profile__description');
-
-const userInformationFromServer = {
-  url: 'https://mesto.nomoreparties.co/v1/cohort-41/users/me',
-  headers: {
-    headers: {
-      authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
-    }
-  }
-}
-
-const yy = new Api(userInformationFromServer);
-// console.log(yy)
-
-const ff = yy.get();
-
-// console.log(ff)
-
-
-// fetch('https://mesto.nomoreparties.co/v1/cohort-41/users/me', {
-//   headers: {
-//     authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
-//   }
-// })
-//   .then(res => res.json())
-//   .then((result) => {
-//     console.log(result);
-//   });
-
-
-
-
 const bigPhoto = new PopupWithImage('.view');
 bigPhoto.setEventListeners();
+
+const serverRequestUser = new Api(userInfoFromServer);
+
+const userInformation = new UserInfo('.profile__header', '.profile__description', '.profile__avatar');
+
+serverRequestUser.get()
+  .then(res => res.json())
+  .then((result) => {
+    userInformation.setUserInfo(result)
+  });
+
+const serverRequestCards = new Api(cardsInfoFromServer);
+
+const section = new Section(
+  {
+    renderer: (element) => {
+      const photoCard = createCard(element);
+      section.addItem(photoCard);
+    }
+  },
+  '.elements__gallery')
+
+serverRequestCards.get()
+  .then(res => res.json())
+  .then((result) => {
+    section.renderItems(result);
+  });
+
+
+
 
 const addFormClass = new PopupWithForm(
   function (inputsData, evt) {
@@ -67,23 +65,13 @@ addFormClass.setEventListeners();
 const profileFormClass = new PopupWithForm(
   function (inputsData, evt) {
     evt.preventDefault();
-    userInformation.setUserInfo(inputsData);
+    userInformation.setUserInfo(inputsData['name-input'], inputsData['description-input']);
     profileFormClass.close();
     editFormValidation.disactivateButtonState();
   }, '.edit'
 );
 
 profileFormClass.setEventListeners();
-
-const section = new Section(
-  {
-    items: initialCards,
-    renderer: (element) => {
-      const photoCard = createCard(element);
-      section.addItem(photoCard);
-    }
-  },
-  '.elements__gallery')
 
 function changeHeader() {
   editFormValidation.resetErrors();
@@ -106,6 +94,4 @@ openAdd.addEventListener('click', function () {
 
 openEdit.addEventListener('click', changeHeader);
 
-window.addEventListener('load', function () {
-  section.renderItems();
-});
+
