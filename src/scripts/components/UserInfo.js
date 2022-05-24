@@ -1,4 +1,4 @@
-import {name as nameSelector, info as informationSelector} from '../utils/consts.js'
+import { name as nameSelector, info as informationSelector } from '../utils/consts.js'
 
 export default class UserInfo {
   constructor(profileHeader, profileInfo, profileAvatar) {
@@ -16,7 +16,10 @@ export default class UserInfo {
   setUserInfo(data) {
     this._profileHeader.textContent = data.name;
     this._profileInfo.textContent = data.about;
-    this._profileAvatar.setAttribute('src', data.avatar);
+
+    if (data.avatar) {
+      this._profileAvatar.setAttribute('src', data.avatar);
+    }
   }
 
 }

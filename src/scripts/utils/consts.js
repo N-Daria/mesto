@@ -2,7 +2,7 @@ export const openEdit = document.querySelector('.profile__edit');
 export const popupEdit = document.querySelector('.edit');
 export const editForm = popupEdit.querySelector('.editForm');
 export const name = editForm.querySelector('input[name="name"]');
-export const info = editForm.querySelector('input[name="description"]');
+export const info = editForm.querySelector('input[name="about"]');
 
 export const cardTemplate = document.querySelector('#card');
 export const addForm = document.querySelector('.addForm');
@@ -13,26 +13,26 @@ export const popupViewImage = popupView.querySelector('.popup__photo');
 export const popupViewTitle = popupView.querySelector('.popup__info');
 
 // export const initialCards = [
-  // {
-  //   name: 'Архыз',
-  //   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  // },
-  // {
-  //   name: 'Челябинская область',
-  //   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  // },
-  // {
-  //   name: 'Иваново',
-  //   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  // },
-  // {
-  //   name: 'Камчатка',
-  //   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  // },
-  // {
-  //   name: 'Холмогорский район',
-  //   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  // },
+// {
+//   name: 'Архыз',
+//   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+// },
+// {
+//   name: 'Челябинская область',
+//   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+// },
+// {
+//   name: 'Иваново',
+//   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+// },
+// {
+//   name: 'Камчатка',
+//   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+// },
+// {
+//   name: 'Холмогорский район',
+//   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+// },
 //   {
 //     name: 'Байкал',
 //     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
@@ -50,14 +50,10 @@ export const settings = {
 
 export const userInfoFromServer = {
   url: 'https://mesto.nomoreparties.co/v1/cohort-41/users/me',
-  headers: {
-    authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
-  }
+  authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
 }
 
 export const cardsInfoFromServer = {
   url: 'https://mesto.nomoreparties.co/v1/cohort-41/cards',
-  headers: {
-    authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
-  }
+  authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
 }

@@ -41,18 +41,25 @@ const section = new Section(
   '.elements__gallery')
 
 serverRequestCards.get()
-  .then(res => res.json())
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+  })
   .then((result) => {
     section.renderItems(result);
+  })
+  .catch((err) => {
+    console.log(err);
   });
-
 
 
 
 const addFormClass = new PopupWithForm(
   function (inputsData, evt) {
     evt.preventDefault();
-    inputsData = { name: inputsData['place-input'], link: inputsData['link-input'] };
+    inputsData = { name: inputsData.place, link: inputsData.link };
+    serverRequestCards.postNewCard(inputsData)
     const photoCard = createCard(inputsData);
     section.addItem(photoCard);
     addFormClass.close();
@@ -60,12 +67,15 @@ const addFormClass = new PopupWithForm(
   }, '.add'
 );
 
+
+
 addFormClass.setEventListeners();
 
 const profileFormClass = new PopupWithForm(
   function (inputsData, evt) {
     evt.preventDefault();
-    userInformation.setUserInfo(inputsData['name-input'], inputsData['description-input']);
+    serverRequestUser.patchUserInfo(inputsData)
+    userInformation.setUserInfo(inputsData);
     profileFormClass.close();
     editFormValidation.disactivateButtonState();
   }, '.edit'
