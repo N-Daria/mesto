@@ -7,7 +7,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width: 80%;
+  min-width: 80%;
   padding: 26px 8px 25px 20px;
   box-sizing: border-box;
 }

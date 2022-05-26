@@ -48,12 +48,17 @@ export const settings = {
   errorClass: 'popup__input-error_active'
 };
 
-export const userInfoFromServer = {
-  url: 'https://mesto.nomoreparties.co/v1/cohort-41/users/me',
-  authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
-}
+// export const userInfoFromServer = {
+//   url: 'https://mesto.nomoreparties.co/v1/cohort-41/users/me',
+//   authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
+// }
 
-export const cardsInfoFromServer = {
-  url: 'https://mesto.nomoreparties.co/v1/cohort-41/cards',
+// export const cardsInfoFromServer = {
+//   url: 'https://mesto.nomoreparties.co/v1/cohort-41/cards',
+//   authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
+// }
+
+export const serverRequestConfig = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-41',
   authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
 }

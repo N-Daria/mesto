@@ -1,10 +1,15 @@
 import { cardTemplate } from '../utils/consts.js';
 
 export default class Card {
-  constructor({ data }, handleCardClick ) {
+  constructor({ data }, handleCardClick, cardLikesServerRequest) {
     this._link = data.link;
     this._name = data.name;
     this._handleCardClick = handleCardClick;
+
+    this._elementLikeNumber = data.likes;
+    this._cardLikesServerRequest = cardLikesServerRequest;
+    this._cardId = data._id;
+    this._count = 0;
   }
 
   _generateTemplate() {
@@ -25,11 +30,18 @@ export default class Card {
     elementPhoto.addEventListener('click', () => this._handleCardClick());
     this._elementLike.addEventListener('click', () => this._likeCard());
     elementRemove.addEventListener('click', () => this._removeCard());
+    this._getLikesNumber(this._elementLikeNumber);
 
     return this._card;
   }
 
+  _getLikesNumber(res) {
+    const elementLikeNumber = this._card.querySelector('.elements__like-number');
+    elementLikeNumber.textContent = res.length;
+  }
+
   _likeCard() {
+    this._cardLikesServerRequest(this._cardId);
     this._elementLike.classList.toggle('elements__like_active');
   }
 
