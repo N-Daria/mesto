@@ -18,3 +18,17 @@
     margin: 15px 0 15px 15px;
   }
 }
+
+/* .profile__info::after {
+  content: " ";
+  background-image: url(../../../images/edit.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 25px;
+  position: relative;
+  width: 30px;
+  top: 20px;
+  left: 20px;
+  height: 30px;
+  display: block;
+} */

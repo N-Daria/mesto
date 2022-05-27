@@ -12,6 +12,11 @@ export const popupView = document.querySelector('.view');
 export const popupViewImage = popupView.querySelector('.popup__photo');
 export const popupViewTitle = popupView.querySelector('.popup__info');
 
+export const openPhotoChange = document.querySelector('.profile__image-container');
+export const popupPhotoProfile = document.querySelector('.photoProfile');
+export const PhotoChangeForm = popupPhotoProfile.querySelector('.PhotoChange');
+export const photo = PhotoChangeForm.querySelector('.input[name="avatar"]')
+
 // export const initialCards = [
 // {
 //   name: 'Архыз',
@@ -47,16 +52,6 @@ export const settings = {
   inputErrorClass: 'popup__input_error',
   errorClass: 'popup__input-error_active'
 };
-
-// export const userInfoFromServer = {
-//   url: 'https://mesto.nomoreparties.co/v1/cohort-41/users/me',
-//   authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
-// }
-
-// export const cardsInfoFromServer = {
-//   url: 'https://mesto.nomoreparties.co/v1/cohort-41/cards',
-//   authorization: 'de7c312c-842d-4e34-9281-7fe5527921f9'
-// }
 
 export const serverRequestConfig = {
   url: 'https://mesto.nomoreparties.co/v1/cohort-41',

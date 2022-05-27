@@ -30,12 +30,31 @@ export default class Api {
         about: data.about
       })
     })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+  }
+
+  patchUserPhoto(data) {
+    fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: data.avatar,
+      })
+    })
       .then(res => {
         if (res.ok) {
           return res.json();
         }
         return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      })
   }
 
   postNewCard(data) {
@@ -55,7 +74,7 @@ export default class Api {
           return res.json();
         }
         return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      })
   }
 
   likeCard(cardId) {
@@ -71,7 +90,7 @@ export default class Api {
           return res.json();
         }
         return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      })
   }
 
   deleteLikeCard(cardId) {
@@ -87,7 +106,7 @@ export default class Api {
           return res.json();
         }
         return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      })
   }
 
 

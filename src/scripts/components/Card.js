@@ -1,7 +1,7 @@
 import { cardTemplate } from '../utils/consts.js';
 
 export default class Card {
-  constructor({ data }, handleCardClick, cardLikesServerRequest) {
+  constructor( data, handleCardClick, cardLikesServerRequest) {
     this._link = data.link;
     this._name = data.name;
     this._handleCardClick = handleCardClick;
@@ -9,7 +9,6 @@ export default class Card {
     this._elementLikeNumber = data.likes;
     this._cardLikesServerRequest = cardLikesServerRequest;
     this._cardId = data._id;
-    this._count = 0;
   }
 
   _generateTemplate() {

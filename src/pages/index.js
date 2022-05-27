@@ -1,6 +1,6 @@
 import './index.css';
 
-import { openEdit, openAdd, settings, editForm, addForm, serverRequestConfig } from '../scripts/utils/consts.js';
+import { openEdit, openAdd, settings, editForm, addForm, serverRequestConfig, PhotoChangeForm, openPhotoChange, popupPhotoProfile } from '../scripts/utils/consts.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js'
 import Section from '../scripts/components/Section.js';
@@ -16,6 +16,9 @@ editFormValidation.enableValidation();
 const addFormValidation = new FormValidator(settings, addForm);
 addFormValidation.enableValidation();
 
+const PhotoChangeFormValidation = new FormValidator(settings, PhotoChangeForm);
+PhotoChangeFormValidation.enableValidation();
+
 const bigPhoto = new PopupWithImage('.view');
 bigPhoto.setEventListeners();
 
@@ -23,10 +26,13 @@ const serverRequest = new Api(serverRequestConfig);
 
 const userInformation = new UserInfo('.profile__header', '.profile__description', '.profile__avatar');
 
-
 serverRequest.get('users/me')
   .then((result) => {
-    userInformation.setUserInfo(result)
+    userInformation.setUserInfo(result);
+    userInformation.setUserPhoto(result);
+  })
+  .catch((err) => {
+    console.log(err);
   });
 
 const section = new Section(
@@ -46,21 +52,20 @@ serverRequest.get('cards')
     console.log(err);
   });
 
-
-
-
-
-
-
 const addFormClass = new PopupWithForm(
   function (inputsData, evt) {
     evt.preventDefault();
     inputsData = { name: inputsData.place, link: inputsData.link };
     serverRequest.postNewCard(inputsData)
-    const photoCard = createCard(inputsData);
-    section.addItem(photoCard);
-    addFormClass.close();
-    addFormValidation.disactivateButtonState();
+      .then((res) => {
+        const photoCard = createCard(res);
+        section.addItem(photoCard);
+        addFormClass.close();
+        addFormValidation.disactivateButtonState();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, '.add'
 );
 
@@ -69,14 +74,39 @@ addFormClass.setEventListeners();
 const profileFormClass = new PopupWithForm(
   function (inputsData, evt) {
     evt.preventDefault();
-    serverRequest.patchUserInfo(inputsData);
-    userInformation.setUserInfo(inputsData);
-    profileFormClass.close();
-    editFormValidation.disactivateButtonState();
+        // debugger
+
+    serverRequest.patchUserInfo(inputsData)
+      // .then((res) => {
+        userInformation.setUserInfo(inputsData);
+        profileFormClass.close();
+        editFormValidation.disactivateButtonState();
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
   }, '.edit'
 );
 
 profileFormClass.setEventListeners();
+
+const profilePhotoFormClass = new PopupWithForm(
+  function (inputsData, evt) {
+    evt.preventDefault();
+
+    serverRequest.patchUserPhoto(inputsData)
+      // .then(res => {
+        userInformation.setUserPhoto(inputsData);
+        profilePhotoFormClass.close();
+        PhotoChangeFormValidation.disactivateButtonState();
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
+  }, '.photoProfile'
+);
+
+profilePhotoFormClass.setEventListeners();
 
 function changeHeader() {
   editFormValidation.resetErrors();
@@ -94,23 +124,33 @@ function cardLikesServerRequest() {
       .then(res => {
         this._getLikesNumber(res.likes);
       })
+      .catch((err) => {
+        console.log(err);
+      });
   } else {
     serverRequest.deleteLikeCard(this._cardId)
       .then(res => {
         this._getLikesNumber(res.likes);
       })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 
 function createCard(data) {
-  const photoCard = new Card({ data }, handleCardClick, cardLikesServerRequest);
+  const photoCard = new Card(data, handleCardClick, cardLikesServerRequest);
   return photoCard.getCard()
 }
 
 openAdd.addEventListener('click', function () {
+  addFormValidation.resetErrors();
   addFormClass.open();
 })
 
 openEdit.addEventListener('click', changeHeader);
 
-
+openPhotoChange.addEventListener('click', function () {
+  PhotoChangeFormValidation.resetErrors();
+  profilePhotoFormClass.open();
+})
