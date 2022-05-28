@@ -15,7 +15,7 @@
  7. Работа с формами. 
 
 <p align="center">
-  <img src="images/skreenshot.jpg"/>
+  <img src="src/images/skreenshot.jpg"/>
 </p>
             
 ## Планы по доработке проекта
