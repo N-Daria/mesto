@@ -1,6 +1,6 @@
 import './index.css';
 
-import { openEdit, openAdd, settings, editForm, addForm, serverRequestConfig, PhotoChangeForm, openPhotoChange, popupPhotoProfile } from '../scripts/utils/consts.js';
+import { openEdit, openAdd, settings, editForm, addForm, serverRequestConfig, PhotoChangeForm, openPhotoChange, popupPhotoProfile, confirmDelete } from '../scripts/utils/consts.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js'
 import Section from '../scripts/components/Section.js';
@@ -8,7 +8,9 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js'
 import Api from '../scripts/components/Api';
+import ConfirmationPopup from '../scripts/components/ConfirmationPopup.js';
 
+let userId = '';
 
 const editFormValidation = new FormValidator(settings, editForm);
 editFormValidation.enableValidation();
@@ -26,14 +28,8 @@ const serverRequest = new Api(serverRequestConfig);
 
 const userInformation = new UserInfo('.profile__header', '.profile__description', '.profile__avatar');
 
-serverRequest.get('users/me')
-  .then((result) => {
-    userInformation.setUserInfo(result);
-    userInformation.setUserPhoto(result);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+const deletePopup = new ConfirmationPopup('.delete', deleteCard)
+deletePopup.setEventListeners();
 
 const section = new Section(
   {
@@ -43,14 +39,6 @@ const section = new Section(
     }
   },
   '.elements__gallery')
-
-serverRequest.get('cards')
-  .then((result) => {
-    section.renderItems(result);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
 const addFormClass = new PopupWithForm(
   function (inputsData, evt) {
@@ -74,17 +62,17 @@ addFormClass.setEventListeners();
 const profileFormClass = new PopupWithForm(
   function (inputsData, evt) {
     evt.preventDefault();
-        // debugger
+    // debugger
 
     serverRequest.patchUserInfo(inputsData)
-      // .then((res) => {
-        userInformation.setUserInfo(inputsData);
-        profileFormClass.close();
-        editFormValidation.disactivateButtonState();
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
+    // .then((res) => {
+    userInformation.setUserInfo(inputsData);
+    profileFormClass.close();
+    editFormValidation.disactivateButtonState();
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // });
   }, '.edit'
 );
 
@@ -95,18 +83,36 @@ const profilePhotoFormClass = new PopupWithForm(
     evt.preventDefault();
 
     serverRequest.patchUserPhoto(inputsData)
-      // .then(res => {
-        userInformation.setUserPhoto(inputsData);
-        profilePhotoFormClass.close();
-        PhotoChangeFormValidation.disactivateButtonState();
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
+    // .then(res => {
+    userInformation.setUserPhoto(inputsData);
+    profilePhotoFormClass.close();
+    PhotoChangeFormValidation.disactivateButtonState();
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // });
   }, '.photoProfile'
 );
 
+
 profilePhotoFormClass.setEventListeners();
+serverRequest.get('users/me')
+  .then((result) => {
+    userInformation.setUserInfo(result);
+    userInformation.setUserPhoto(result);
+    userId = result._id;
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
+serverRequest.get('cards')
+  .then((result) => {
+    section.renderItems(result);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 function changeHeader() {
   editFormValidation.resetErrors();
@@ -138,8 +144,23 @@ function cardLikesServerRequest() {
   }
 }
 
+function openPopupDelete(cardId, cardElement) {
+  deletePopup.open(cardId, cardElement);
+}
+
+function deleteCard(cardId, cardElement) {
+  serverRequest.deleteLikeCard(cardId)
+    .then(() => {
+      deletePopup.close();
+      cardElement.remove();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 function createCard(data) {
-  const photoCard = new Card(data, handleCardClick, cardLikesServerRequest);
+  const photoCard = new Card(data, handleCardClick, cardLikesServerRequest, openPopupDelete, userId);
   return photoCard.getCard()
 }
 

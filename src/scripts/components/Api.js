@@ -94,7 +94,7 @@ export default class Api {
   }
 
   deleteLikeCard(cardId) {
-    return fetch(`${this._url}/cards/${cardId}/likes`, {
+    return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
         authorization: this._authorization,
