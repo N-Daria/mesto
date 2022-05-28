@@ -19,6 +19,7 @@ export default class UserInfo {
 
   setUserPhoto(data) {
     this._profileAvatar.setAttribute('src', data.avatar);
+    this._profileAvatar.setAttribute('alt', data.name);
   }
 
 }

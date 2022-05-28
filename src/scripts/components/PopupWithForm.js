@@ -5,6 +5,8 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._callbackFunction = callbackFunction;
     this._inputs = Array.from(this._popupSelector.querySelectorAll('input'));
+    this._button = document.querySelector(popupSelector).querySelector('.popup__button');
+    this._buttonText = this._button.textContent;
   }
 
   _getInputValues() {
@@ -26,6 +28,15 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
     this._popupSelector.querySelector('form').reset();
+  }
+
+  changeButtonText(config) {
+    if (config) {
+      this._button.textContent = 'Сохранение...';
+    }
+    else {
+      this._button.textContent = `${this._buttonText}`;
+    }
   }
 
 }

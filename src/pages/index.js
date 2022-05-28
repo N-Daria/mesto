@@ -43,13 +43,15 @@ const section = new Section(
 const addFormClass = new PopupWithForm(
   function (inputsData, evt) {
     evt.preventDefault();
+    addFormClass.changeButtonText(true);
     inputsData = { name: inputsData.place, link: inputsData.link };
     serverRequest.postNewCard(inputsData)
       .then((res) => {
         const photoCard = createCard(res);
         section.addItem(photoCard);
-        addFormClass.close();
         addFormValidation.disactivateButtonState();
+        addFormClass.close();
+        addFormClass.changeButtonText(false);
       })
       .catch((err) => {
         console.log(err);
@@ -62,17 +64,18 @@ addFormClass.setEventListeners();
 const profileFormClass = new PopupWithForm(
   function (inputsData, evt) {
     evt.preventDefault();
-    // debugger
-
+    profileFormClass.changeButtonText(true);
     serverRequest.patchUserInfo(inputsData)
-    // .then((res) => {
-    userInformation.setUserInfo(inputsData);
-    profileFormClass.close();
-    editFormValidation.disactivateButtonState();
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+      .then((res) => {
+        userInformation.setUserInfo(res);
+        editFormValidation.disactivateButtonState();
+        profileFormClass.close();
+        profileFormClass.changeButtonText(false);
+      }
+      )
+      .catch((err) => {
+        console.log(err);
+      });
   }, '.edit'
 );
 
@@ -81,21 +84,22 @@ profileFormClass.setEventListeners();
 const profilePhotoFormClass = new PopupWithForm(
   function (inputsData, evt) {
     evt.preventDefault();
-
+    profilePhotoFormClass.changeButtonText(true);
     serverRequest.patchUserPhoto(inputsData)
-    // .then(res => {
-    userInformation.setUserPhoto(inputsData);
-    profilePhotoFormClass.close();
-    PhotoChangeFormValidation.disactivateButtonState();
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+      .then(res => {
+        userInformation.setUserPhoto(inputsData);
+        profilePhotoFormClass.changeButtonText(false);
+        profilePhotoFormClass.close();
+        PhotoChangeFormValidation.disactivateButtonState();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, '.photoProfile'
 );
 
-
 profilePhotoFormClass.setEventListeners();
+
 serverRequest.get('users/me')
   .then((result) => {
     userInformation.setUserInfo(result);

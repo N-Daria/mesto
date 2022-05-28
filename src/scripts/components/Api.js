@@ -19,7 +19,7 @@ export default class Api {
   }
 
   patchUserInfo(data) {
-    fetch(`${this._url}/users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this._authorization,
@@ -39,7 +39,7 @@ export default class Api {
   }
 
   patchUserPhoto(data) {
-    fetch(`${this._url}/users/me/avatar`, {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
         authorization: this._authorization,
