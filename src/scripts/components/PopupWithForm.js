@@ -7,6 +7,7 @@ export default class PopupWithForm extends Popup {
     this._inputs = Array.from(this._popupSelector.querySelectorAll('input'));
     this._button = document.querySelector(popupSelector).querySelector('.popup__button');
     this._buttonText = this._button.textContent;
+    this._form = this._popupSelector.querySelector('form');
   }
 
   _getInputValues() {
@@ -27,7 +28,7 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    this._popupSelector.querySelector('form').reset();
+    this._form.reset();
   }
 
   changeButtonText(config) {

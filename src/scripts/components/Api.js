@@ -4,18 +4,20 @@ export default class Api {
     this._authorization = config.authorization;
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка ${res.status}`);
+  }
+
   get(url) {
     return fetch(`${this._url}/${url}`, {
       headers: {
         authorization: this._authorization
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._checkResponse)
   }
 
   patchUserInfo(data) {
@@ -30,12 +32,7 @@ export default class Api {
         about: data.about
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._checkResponse)
   }
 
   patchUserPhoto(data) {
@@ -49,12 +46,7 @@ export default class Api {
         avatar: data.avatar,
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._checkResponse)
   }
 
   postNewCard(data) {
@@ -69,12 +61,7 @@ export default class Api {
         link: data.link
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._checkResponse)
   }
 
   likeCard(cardId) {
@@ -85,15 +72,21 @@ export default class Api {
         'Content-Type': 'application/json'
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._checkResponse)
   }
 
   deleteLikeCard(cardId) {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(this._checkResponse)
+  }
+
+  deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
@@ -101,14 +94,7 @@ export default class Api {
         'Content-Type': 'application/json'
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._checkResponse)
   }
-
-
 
 }

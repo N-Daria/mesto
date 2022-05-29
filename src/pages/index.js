@@ -1,6 +1,6 @@
 import './index.css';
 
-import { openEdit, openAdd, settings, editForm, addForm, serverRequestConfig, PhotoChangeForm, openPhotoChange, popupPhotoProfile, confirmDelete } from '../scripts/utils/consts.js';
+import { openEdit, openAdd, settings, editForm, addForm, serverRequestConfig, PhotoChangeForm, openPhotoChange, userNameInput, userInfoInput, popupPhotoProfile, confirmDelete } from '../scripts/utils/consts.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js'
 import Section from '../scripts/components/Section.js';
@@ -51,11 +51,13 @@ const addFormClass = new PopupWithForm(
         section.addItem(photoCard);
         addFormValidation.disactivateButtonState();
         addFormClass.close();
-        addFormClass.changeButtonText(false);
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => {
+        addFormClass.changeButtonText(false);
+      })
   }, '.add'
 );
 
@@ -70,12 +72,13 @@ const profileFormClass = new PopupWithForm(
         userInformation.setUserInfo(res);
         editFormValidation.disactivateButtonState();
         profileFormClass.close();
-        profileFormClass.changeButtonText(false);
-      }
-      )
+      })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => {
+        profileFormClass.changeButtonText(false);
+      })
   }, '.edit'
 );
 
@@ -88,31 +91,27 @@ const profilePhotoFormClass = new PopupWithForm(
     serverRequest.patchUserPhoto(inputsData)
       .then(res => {
         userInformation.setUserPhoto(inputsData);
-        profilePhotoFormClass.changeButtonText(false);
-        profilePhotoFormClass.close();
         PhotoChangeFormValidation.disactivateButtonState();
+        profilePhotoFormClass.close();
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => {
+        profilePhotoFormClass.changeButtonText(false);
+      })
   }, '.photoProfile'
 );
 
 profilePhotoFormClass.setEventListeners();
 
-serverRequest.get('users/me')
-  .then((result) => {
-    userInformation.setUserInfo(result);
-    userInformation.setUserPhoto(result);
-    userId = result._id;
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+Promise.all([serverRequest.get('users/me'), serverRequest.get('cards')])
+  .then(([userData, cards]) => {
+    userInformation.setUserInfo(userData);
+    userInformation.setUserPhoto(userData);
+    userId = userData._id;
 
-serverRequest.get('cards')
-  .then((result) => {
-    section.renderItems(result);
+    section.renderItems(cards);
   })
   .catch((err) => {
     console.log(err);
@@ -121,7 +120,8 @@ serverRequest.get('cards')
 function changeHeader() {
   editFormValidation.resetErrors();
   profileFormClass.open();
-  userInformation.getUserInfo();
+  userNameInput.value = (userInformation.getUserInfo()).name;
+  userInfoInput.value = (userInformation.getUserInfo()).info;
 }
 
 function handleCardClick() {
@@ -153,7 +153,7 @@ function openPopupDelete(cardId, cardElement) {
 }
 
 function deleteCard(cardId, cardElement) {
-  serverRequest.deleteLikeCard(cardId)
+  serverRequest.deleteCard(cardId)
     .then(() => {
       deletePopup.close();
       cardElement.remove();
@@ -164,7 +164,7 @@ function deleteCard(cardId, cardElement) {
 }
 
 function createCard(data) {
-  const photoCard = new Card(data, handleCardClick, cardLikesServerRequest, openPopupDelete, userId);
+  const photoCard = new Card(data, '#card', handleCardClick, cardLikesServerRequest, openPopupDelete, userId);
   return photoCard.getCard()
 }
 
