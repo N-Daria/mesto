@@ -24,12 +24,12 @@ PhotoChangeFormValidation.enableValidation();
 const bigPhoto = new PopupWithImage('.view');
 bigPhoto.setEventListeners();
 
+const deletePopup = new ConfirmationPopup('.delete', deleteCard)
+deletePopup.setEventListeners();
+
 const serverRequest = new Api(serverRequestConfig);
 
 const userInformation = new UserInfo('.profile__header', '.profile__description', '.profile__avatar');
-
-const deletePopup = new ConfirmationPopup('.delete', deleteCard)
-deletePopup.setEventListeners();
 
 const section = new Section(
   {
@@ -150,15 +150,12 @@ function cardLikesServerRequest() {
   }
 }
 
-function openPopupDelete(cardId, cardElement) {
-  deletePopup.open(cardId, cardElement);
-}
-
-function deleteCard(cardId, cardElement) {
-  serverRequest.deleteCard(cardId)
+function deleteCard(cardData) {
+  serverRequest.deleteCard(cardData.cardId)
     .then(() => {
       deletePopup.close();
-      cardElement.remove();
+      cardData.cardElement.remove();
+      cardData.cardElement = null;
     })
     .catch((err) => {
       console.log(err);
@@ -171,9 +168,13 @@ function createCard(data) {
     cardTemplate: '#card',
     handleCardClick: handleCardClick,
     cardLikesServerRequest: cardLikesServerRequest,
-    openPopupDelete: openPopupDelete,
-    userId: userId
+    userId: userId,
+    handleDelete: (cardId, cardElement) => {
+      deletePopup.giveCardData(cardId, cardElement);
+      deletePopup.open();
+    }
   });
+
   return photoCard.getCard()
 }
 

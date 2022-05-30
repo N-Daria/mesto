@@ -7,20 +7,16 @@ export default class ConfirmationPopup extends Popup {
     this._callbackFunction = callbackFunction;
   }
 
-  close() {
-    super.close();
-    this._confirmButton.removeEventListener('click', this._callbackFunction)
-  }
-
-  open(cardId, cardElement) {
-    super.open();
+  setEventListeners() {
+    super.setEventListeners();
     this._confirmButton.addEventListener('click', () => {
-      this._callbackFunction(cardId, cardElement)
+      this._callbackFunction(this._cardData);
     })
   }
- 
-  // setEventListeners(cardId, cardElement) {
-  //   this._callbackFunction(cardId, cardElement);
-  // }
+
+  giveCardData(cardId, cardElement) {
+    this._cardData = { cardId, cardElement };
+    return this._cardData
+  }
 
 }

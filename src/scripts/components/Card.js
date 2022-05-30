@@ -6,10 +6,10 @@ export default class Card {
     this._elementLikeNumber = config.data.likes;
     this._cardLikesServerRequest = config.cardLikesServerRequest;
     this._cardId = config.data._id;
-    this._openPopupDelete = config.openPopupDelete;
     this._userId = config.userId;
     this._ownerId = config.data.owner._id;
     this._cardTemplate = document.querySelector(config.cardTemplate);
+    this.handleDeleteClick = config.handleDeleteClick;
   }
 
   _generateTemplate() {
@@ -39,7 +39,9 @@ export default class Card {
     const elementRemove = this._card.querySelector('.elements__remove');
 
     if (this._ownerId === this._userId) {
-      elementRemove.addEventListener('click', () => this._DD());
+      elementRemove.addEventListener('click', () => {
+        this.handleDeleteClick(this._cardId, this._card);
+      });
     } else {
       elementRemove.remove();
     }
@@ -50,11 +52,4 @@ export default class Card {
     elementLikeNumber.textContent = res.length;
   }
 
-  // deleteCard() {
-    // this._card.remove();
-    // this._element = null;
-  // }
-  _DD() {
-    this.openPopupDelete(this._cardId, this._card);
-  }
 }
