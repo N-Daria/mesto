@@ -1,17 +1,15 @@
-// import { cardTemplate } from '../utils/consts.js';
-
 export default class Card {
-  constructor(data, cardTemplate, handleCardClick, cardLikesServerRequest, openPopupDelete, userId) {
-    this._link = data.link;
-    this._name = data.name;
-    this._handleCardClick = handleCardClick;
-    this._elementLikeNumber = data.likes;
-    this._cardLikesServerRequest = cardLikesServerRequest;
-    this._cardId = data._id;
-    this.openPopupDelete = openPopupDelete;
-    this._userId = userId;
-    this._ownerId = data.owner._id;
-    this._cardTemplate = document.querySelector(cardTemplate);
+  constructor(config) {
+    this._link = config.data.link;
+    this._name = config.data.name;
+    this._handleCardClick = config.handleCardClick;
+    this._elementLikeNumber = config.data.likes;
+    this._cardLikesServerRequest = config.cardLikesServerRequest;
+    this._cardId = config.data._id;
+    this._openPopupDelete = config.openPopupDelete;
+    this._userId = config.userId;
+    this._ownerId = config.data.owner._id;
+    this._cardTemplate = document.querySelector(config.cardTemplate);
   }
 
   _generateTemplate() {
@@ -36,12 +34,12 @@ export default class Card {
 
   _setEventListeners() {
     this._elementPhoto.addEventListener('click', () => this._handleCardClick());
-    this._elementLike.addEventListener('click', () => this._likeCard());
+    this._elementLike.addEventListener('click', () => this._cardLikesServerRequest());
 
     const elementRemove = this._card.querySelector('.elements__remove');
 
     if (this._ownerId === this._userId) {
-      elementRemove.addEventListener('click', () => this._openPopupDelete());
+      elementRemove.addEventListener('click', () => this._DD());
     } else {
       elementRemove.remove();
     }
@@ -52,13 +50,11 @@ export default class Card {
     elementLikeNumber.textContent = res.length;
   }
 
-  _likeCard() {
-    this._cardLikesServerRequest(this._cardId);
-    this._elementLike.classList.toggle('elements__like_active');
-  }
-
-  _openPopupDelete() {
+  // deleteCard() {
+    // this._card.remove();
+    // this._element = null;
+  // }
+  _DD() {
     this.openPopupDelete(this._cardId, this._card);
   }
-
 }

@@ -133,6 +133,7 @@ function cardLikesServerRequest() {
     serverRequest.likeCard(this._cardId)
       .then(res => {
         this._getLikesNumber(res.likes);
+        this._elementLike.classList.add('elements__like_active');
       })
       .catch((err) => {
         console.log(err);
@@ -141,6 +142,7 @@ function cardLikesServerRequest() {
     serverRequest.deleteLikeCard(this._cardId)
       .then(res => {
         this._getLikesNumber(res.likes);
+        this._elementLike.classList.remove('elements__like_active');
       })
       .catch((err) => {
         console.log(err);
@@ -164,7 +166,14 @@ function deleteCard(cardId, cardElement) {
 }
 
 function createCard(data) {
-  const photoCard = new Card(data, '#card', handleCardClick, cardLikesServerRequest, openPopupDelete, userId);
+  const photoCard = new Card({
+    data: data,
+    cardTemplate: '#card',
+    handleCardClick: handleCardClick,
+    cardLikesServerRequest: cardLikesServerRequest,
+    openPopupDelete: openPopupDelete,
+    userId: userId
+  });
   return photoCard.getCard()
 }
 

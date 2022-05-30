@@ -18,5 +18,9 @@ export default class ConfirmationPopup extends Popup {
       this._callbackFunction(cardId, cardElement)
     })
   }
+ 
+  // setEventListeners(cardId, cardElement) {
+  //   this._callbackFunction(cardId, cardElement);
+  // }
 
 }
