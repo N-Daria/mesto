@@ -169,7 +169,7 @@ function createCard(data) {
     handleCardClick: handleCardClick,
     cardLikesServerRequest: cardLikesServerRequest,
     userId: userId,
-    handleDelete: (cardId, cardElement) => {
+    handleDeleteClick: (cardId, cardElement) => {
       deletePopup.giveCardData(cardId, cardElement);
       deletePopup.open();
     }
